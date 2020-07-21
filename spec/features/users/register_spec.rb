@@ -90,7 +90,7 @@ RSpec.describe 'User registration page' do
     fill_in :password_confirmation, with: password
 
     click_button "Register"
-    save_and_open_page
+
     expect(current_path).to eq('/register')
     expect(page).to have_content('Email has already been taken')
     expect(page).to have_content(name)
@@ -99,6 +99,5 @@ RSpec.describe 'User registration page' do
     expect(page).to have_content(state)
     expect(page).to have_content(zip)
     expect(page).to_not have_content(email)
-    expect(page).to_not have_content(password)
   end
 end
