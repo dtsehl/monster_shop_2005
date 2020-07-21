@@ -64,6 +64,41 @@ RSpec.describe 'User registration page' do
 
     expect(current_path).to eq('/register')
 
-    expect(page).to have_content('You must fill out all fields in order to register!')
+    expect(page).to have_content("Zip can't be blank")
+  end
+
+  it 'does not allow the visitor to register unless the email address is unique' do
+    User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'me@me.com', password: 'secret')
+
+    visit '/register'
+
+    name = 'Tom'
+    address = '123 Who Cares Ln'
+    city = 'Denver'
+    state = 'CO'
+    zip = '12345'
+    email = 'me@me.com'
+    password = 'secret'
+
+    fill_in :name, with: name
+    fill_in :address, with: address
+    fill_in :city, with: city
+    fill_in :state, with: state
+    fill_in :zip, with: zip
+    fill_in :email, with: email
+    fill_in :password, with: password
+    fill_in :password_confirmation, with: password
+
+    click_button "Register"
+    save_and_open_page
+    expect(current_path).to eq('/register')
+    expect(page).to have_content('Email has already been taken')
+    expect(page).to have_content(name)
+    expect(page).to have_content(address)
+    expect(page).to have_content(city)
+    expect(page).to have_content(state)
+    expect(page).to have_content(zip)
+    expect(page).to_not have_content(email)
+    expect(page).to_not have_content(password)
   end
 end
