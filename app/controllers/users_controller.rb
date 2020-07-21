@@ -13,6 +13,8 @@ class UsersController < ApplicationController
       redirect_to '/profile'
       flash[:success] = 'Registration successful! You are now logged in.'
     else
+      redirect_to request.referrer
+      flash[:error] = 'You must fill out all fields in order to register!'
     end
   end
 
