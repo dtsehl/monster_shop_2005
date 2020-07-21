@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20200721200108) do
     t.string "zip"
     t.string "email"
     t.string "password_digest"
-    t.integer "role"
+    t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
