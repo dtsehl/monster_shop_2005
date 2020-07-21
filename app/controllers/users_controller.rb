@@ -4,7 +4,6 @@ class UsersController < ApplicationController
   end
 
   def new
-    require "pry"; binding.pry
   end
 
   def create
