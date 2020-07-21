@@ -1,4 +1,4 @@
-class Item <ApplicationRecord
+class Item < ApplicationRecord
   belongs_to :merchant
   has_many :reviews, dependent: :destroy
   has_many :item_orders
@@ -12,7 +12,6 @@ class Item <ApplicationRecord
   validates_inclusion_of :active?, :in => [true, false]
   validates_numericality_of :price, greater_than: 0
 
-
   def average_review
     reviews.average(:rating)
   end
@@ -24,5 +23,4 @@ class Item <ApplicationRecord
   def no_orders?
     item_orders.empty?
   end
-
 end
