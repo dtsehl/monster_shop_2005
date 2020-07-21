@@ -13,7 +13,7 @@
     <%= text_field_tag :state %>
 
     <%= label_tag :zip %>
-    <%= number_field_tag :zip %>
+    <%= text_field_tag :zip %>
 
     <%= label_tag :email %>
     <%= text_field_tag :email %>
@@ -21,7 +21,7 @@
     <%= label_tag :password %>
     <%= text_field_tag :password %>
 
-    <%= label_tag :password_confirmation %>
+    <%= label_tag :password_confirmation, 'Password Confirmation' %>
     <%= text_field_tag :password_confirmation %>
 
     <%= submit_tag 'Register' %>
