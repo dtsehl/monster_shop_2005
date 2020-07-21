@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def new
+    require "pry"; binding.pry
   end
 
   def create
@@ -14,7 +15,7 @@ class UsersController < ApplicationController
       flash[:success] = 'Registration successful! You are now logged in.'
     else
       redirect_to request.referrer
-      flash[:error] = 'You must fill out all fields in order to register!'
+      flash[:error] = new_user.errors.full_messages.first
     end
   end
 
