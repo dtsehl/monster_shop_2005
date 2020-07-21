@@ -24,6 +24,7 @@ group :development, :test do
   gem 'simplecov'
   gem 'shoulda-matchers'
   gem 'nyan-cat-formatter'
+  gem 'bcrypt'
 end
 
 group :development do
