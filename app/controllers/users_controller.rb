@@ -7,14 +7,14 @@ class UsersController < ApplicationController
   end
 
   def create
-    new_user = User.new(user_params)
-    if new_user.save
-      session[:user_id] = new_user.id
+    @new_user = User.new(user_params)
+    if @new_user.save
+      session[:user_id] = @new_user.id
       redirect_to '/profile'
       flash[:success] = 'Registration successful! You are now logged in.'
     else
-      redirect_to request.referrer
-      flash[:error] = new_user.errors.full_messages.first
+      flash[:error] = @new_user.errors.full_messages.first
+      render :new
     end
   end
 
