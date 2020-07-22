@@ -111,7 +111,6 @@ RSpec.describe 'User can login' do
       visit '/login'
 
       expect(current_path).to eq('/admin/dashboard')
-
     end
   end
 end

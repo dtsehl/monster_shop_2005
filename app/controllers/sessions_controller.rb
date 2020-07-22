@@ -1,5 +1,10 @@
 class SessionsController < ApplicationController
   def new
+    if !session[:user_id].nil?
+      redirect_to '/profile' if current_user.role == "user"
+      redirect_to '/merchant/dashboard' if current_user.role == "merchant"
+      redirect_to '/admin/dashboard' if current_user.role == "admin"
+    end
   end
 
   def create
