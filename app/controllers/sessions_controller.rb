@@ -20,4 +20,11 @@ class SessionsController < ApplicationController
       redirect_to '/admin/dashboard' if user.role == "admin"
     end
   end
+
+  def destroy
+    session.delete(:user_id)
+    session.delete(:cart)
+    flash[:success] = "You have successfully logged out!"
+    redirect_to '/'
+  end
 end
