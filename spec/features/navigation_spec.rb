@@ -33,5 +33,8 @@ RSpec.describe 'Site Navigation' do
       end
 
     end
+    it "displays links to welcome, items, merchants, cart, login, register" do
+
+    end
   end
 end
