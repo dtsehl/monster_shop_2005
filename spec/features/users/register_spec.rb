@@ -93,11 +93,11 @@ RSpec.describe 'User registration page' do
 
     expect(current_path).to eq('/register')
     expect(page).to have_content('Email has already been taken')
-    expect(page).to have_content(name)
-    expect(page).to have_content(address)
-    expect(page).to have_content(city)
-    expect(page).to have_content(state)
-    expect(page).to have_content(zip)
-    expect(page).to_not have_content(email)
+    expect(page).to have_field('Name', with: name)
+    expect(page).to have_field('Address', with: address)
+    expect(page).to have_field('City', with: city)
+    expect(page).to have_field('State', with: state)
+    expect(page).to have_field('Zip', with: zip)
+    expect(page).to_not have_field('Email', with: email)
   end
 end
