@@ -17,4 +17,32 @@ RSpec.describe User do
     it { should have_many :user_orders }
     it { should have_many(:orders).through(:user_orders) }
   end
-end
+
+  describe "roles" do
+    it "can be created as an user" do
+      user = User.create(username: "penelope",
+                         password: "boom",
+                         role: 0)
+
+      expect(user.role).to eq("user")
+      expect(user.user?).to be_truthy
+    end
+
+    it "can be created as a merchant user" do
+      user = User.create(username: "sammy",
+                         password: "pass",
+                         role: 1)
+
+      expect(user.role).to eq("merchant")
+      expect(user.merchant?).to be_truthy
+    end
+
+    it "can be created as a admin user" do
+      user = User.create(username: "sammy",
+                         password: "pass",
+                         role: 2)
+
+      expect(user.role).to eq("admin")
+      expect(user.admin?).to be_truthy
+    end
+  end
