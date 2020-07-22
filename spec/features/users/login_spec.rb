@@ -31,21 +31,21 @@ RSpec.describe 'User can login' do
     expect(current_path).to eq('/merchant/dashboard')
     expect(page).to have_content("Hello, #{m_user.name}, you are now logged in.")
   end
-  # it 'allows an admin user to log in with valid information' do
-  #   a_user = User.create!(name: 'Admin', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'admin@me.com', password: 'secret', role: 2)
-  #
-  #   visit '/login'
-  #   expect(page).to have_field("Email Address")
-  #   expect(page).to have_field("Password")
-  #
-  #   fill_in :email, with: a_user.email
-  #   fill_in :password, with: a_user.password
-  #
-  #   click_button "Log In"
-  #
-  #   expect(current_path).to eq('/admin/dashboard')
-  #   expect(page).to have_content("Hello, #{a_user.name}, you are now logged in.")
-  # end
+  it 'allows an admin user to log in with valid information' do
+    a_user = User.create!(name: 'Admin', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'admin@me.com', password: 'secret', role: 2)
+
+    visit '/login'
+    expect(page).to have_field("Email Address")
+    expect(page).to have_field("Password")
+
+    fill_in :email, with: a_user.email
+    fill_in :password, with: a_user.password
+
+    click_button "Log In"
+
+    expect(current_path).to eq('/admin/dashboard')
+    expect(page).to have_content("Hello, #{a_user.name}, you are now logged in.")
+  end
 end
 
 
