@@ -70,14 +70,58 @@ RSpec.describe 'User can login' do
 
     expect(page).to have_content("Log in information incorrect, please try again.")
   end
+
+  describe 'already logged in user' do
+    it 'redirects user to profile page' do
+      user = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret')
+
+      visit '/login'
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+      click_button "Log In"
+
+      visit '/login'
+
+      expect(current_path).to eq('/profile')
+
+    end
+
+    it 'redirects merchant to merchant dashboard' do
+      m_user = User.create!(name: 'Merchant', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'merchant@me.com', password: 'secret', role: 1)
+
+      visit '/login'
+      fill_in :email, with: m_user.email
+      fill_in :password, with: m_user.password
+
+      click_button "Log In"
+
+      visit '/login'
+
+      expect(current_path).to eq('/merchant/dashboard')
+    end
+    it 'redirects admin to admin dashboard' do
+      a_user = User.create!(name: 'Admin', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'admin@me.com', password: 'secret', role: 2)
+
+      visit '/login'
+      fill_in :email, with: a_user.email
+      fill_in :password, with: a_user.password
+
+      click_button "Log In"
+
+      visit '/login'
+
+      expect(current_path).to eq('/admin/dashboard')
+
+    end
+  end
 end
 
 
-# User Story 14, User cannot log in with bad credentials
+# User Story 15, Users who are logged in already are redirected
 #
-# As a visitor
-# When I visit the login page ("/login")
-# And I submit invalid information
-# Then I am redirected to the login page
-# And I see a flash message that tells me that my credentials were incorrect
-# I am NOT told whether it was my email or password that was incorrect
+# As a registered user, merchant, or admin
+# When I visit the login path
+# If I am a regular user, I am redirected to my profile page
+# If I am a merchant user, I am redirected to my merchant dashboard page
+# If I am an admin user, I am redirected to my admin dashboard page
+# And I see a flash message that tells me I am already logged in
