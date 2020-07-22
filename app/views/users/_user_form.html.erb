@@ -1,0 +1,19 @@
+<%= form_tag path, method: method do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name, (if @new_user.present? then @new_user.name else nil end) %>
+  <%= label_tag :address %>
+  <%= text_field_tag :address, (if @new_user.present? then @new_user.address else nil end) %>
+  <%= label_tag :city %>
+  <%= text_field_tag :city, (if @new_user.present? then @new_user.city else nil end) %>
+  <%= label_tag :state %>
+  <%= text_field_tag :state, (if @new_user.present? then @new_user.state else nil end) %>
+  <%= label_tag :zip %>
+  <%= text_field_tag :zip, (if @new_user.present? then @new_user.zip else nil end) %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email %>
+  <%= label_tag :password %>
+  <%= text_field_tag :password %>
+  <%= label_tag :password_confirmation, 'Password Confirmation' %>
+  <%= text_field_tag :password_confirmation %>
+  <%= submit_tag button %>
+<% end %>
