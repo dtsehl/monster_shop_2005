@@ -38,4 +38,12 @@ Rails.application.routes.draw do
   get  "/orders/new", to: "orders#new"
   post "/orders",     to: "orders#create"
   get  "/orders/:id", to: "orders#show"
+
+  namespace :merchant do
+    get '/', to: 'dashboard#index'
+  end
+
+  namespace :admin do
+    get '/', to: 'dashboard#index'
+  end
 end
