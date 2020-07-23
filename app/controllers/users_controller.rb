@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  def profile
+  def show
     @user = current_user
     render file: "/public/404" if !current_user
   end
