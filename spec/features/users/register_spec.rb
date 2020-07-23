@@ -56,6 +56,7 @@ RSpec.describe 'User registration page' do
     fill_in :address, with: address
     fill_in :city, with: city
     fill_in :state, with: state
+    fill_in :zip, with: zip
     fill_in :email, with: email
     fill_in :password, with: password
     fill_in :password_confirmation, with: password

@@ -19,19 +19,33 @@ RSpec.describe 'Site Navigation' do
 
     end
 
-    it "I can see a cart indicator on all pages" do
-      visit '/merchants'
+    it "Nav bar displays links to home, items, merchants, cart, login, register" do
+      visit '/'
 
-      within 'nav' do
-        expect(page).to have_content("Cart: 0")
-      end
+      expect(page).to have_link('Home')
+      expect(page).to have_link('All Items')
+      expect(page).to have_link('All Merchants')
+      expect(page).to have_link('Cart: 0')
+      expect(page).to have_link('Login')
+      expect(page).to have_link('Register')
 
-      visit '/items'
+      visit "/items"
 
-      within 'nav' do
-        expect(page).to have_content("Cart: 0")
-      end
-
+      expect(page).to have_link('Home')
+      expect(page).to have_link('All Items')
+      expect(page).to have_link('All Merchants')
+      expect(page).to have_link('Cart: 0')
+      expect(page).to have_link('Login')
+      expect(page).to have_link('Register')
     end
+<<<<<<< HEAD:spec/features/navigation_spec.rb
+
+    it "I see 404 error when I try to access '/merchant', '/admin', and '/profile' " do
+      visit '/merchant'
+
+      expect(page).to have_content("The page you were looking for doesn't exist.")
+    end
+=======
+>>>>>>> us2-9-ad-ds:spec/features/navigation/navigation_spec.rb
   end
 end
