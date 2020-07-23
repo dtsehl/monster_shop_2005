@@ -15,8 +15,8 @@ RSpec.describe 'Site Navigation' do
       within 'nav' do
         click_link 'All Merchants'
       end
-
       expect(current_path).to eq('/merchants')
+
     end
 
     it "Nav bar displays links to home, items, merchants, cart, login, register" do
@@ -38,11 +38,14 @@ RSpec.describe 'Site Navigation' do
       expect(page).to have_link('Login')
       expect(page).to have_link('Register')
     end
+<<<<<<< HEAD:spec/features/navigation_spec.rb
 
     it "I see 404 error when I try to access '/merchant', '/admin', and '/profile' " do
       visit '/merchant'
 
       expect(page).to have_content("The page you were looking for doesn't exist.")
     end
+=======
+>>>>>>> us2-9-ad-ds:spec/features/navigation/navigation_spec.rb
   end
 end

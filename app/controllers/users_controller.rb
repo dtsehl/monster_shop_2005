@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   def profile
+    require "pry"; binding.pry
     @user = User.find(session[:user_id])
   end
 
