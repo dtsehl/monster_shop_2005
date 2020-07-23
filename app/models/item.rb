@@ -23,4 +23,14 @@ class Item < ApplicationRecord
   def no_orders?
     item_orders.empty?
   end
+
+  def self.top_five
+    items = ItemOrder.all
+    items.order(quantity: :desc).limit(5)
+  end
+
+  def self.bottom_five
+    items = ItemOrder.all
+    items.order(:quantity).limit(5)
+  end
 end
