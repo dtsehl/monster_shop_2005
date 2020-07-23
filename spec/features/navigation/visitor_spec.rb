@@ -38,13 +38,6 @@ RSpec.describe 'Site Navigation' do
       expect(page).to have_link('Register')
     end
 
-    # As a visitor
-    # When I try to access any path that begins with the following, then I see a 404 error:
-    #
-    # '/merchant'
-    # '/admin'
-    # '/profile'
-
     it "gives a 404 error if trying to access a restricted path" do
 
       visit '/merchant'
