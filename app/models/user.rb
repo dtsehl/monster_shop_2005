@@ -7,6 +7,6 @@ class User < ApplicationRecord
   has_many :orders, through: :user_orders
 
   enum role: %w(user merchant admin)
-  
+
   has_secure_password
 end

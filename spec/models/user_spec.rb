@@ -18,28 +18,24 @@ RSpec.describe User do
     it { should have_many(:orders).through(:user_orders) }
   end
 
-  describe "roles" do
-    it "can be created as an user" do
-      user = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'me@me.com', password: 'secret')
+  describe 'roles' do
+    it "can be created as a default user" do
+      default_user = User.create!(name: "Joe", address: "123 Nowhere Pl.", city: "Denver", state: "CO", zip: "80202", email: "default@default.com", password: "default", role: 0)
 
-      expect(user.role).to eq("user")
-      expect(user.user?).to be_truthy
+      expect(default_user.role).to eq("user")
+      expect(default_user.user?).to be_truthy
     end
+    it "can be created as a merchant employee" do
+      merchant_user = User.create!(name: "Sally", address: "123 Nowhere Pl.", city: "Denver", state: "CO", zip: "80202", email: "merchant@merchant.com", password: "merchant", role: 1)
 
-    it "can be created as a merchant user" do
-      user = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'me@me.com', password: 'secret', role: 1)
-
-
-      expect(user.role).to eq("merchant")
-      expect(user.merchant?).to be_truthy
+      expect(merchant_user.role).to eq("merchant")
+      expect(merchant_user.merchant?).to be_truthy
     end
+    it "can be created as an admin" do
+      admin_user = User.create!(name: "Harry", address: "123 Nowhere Pl.", city: "Denver", state: "CO", zip: "80202", email: "admin@admin.com", password: "admin", role: 2)
 
-    it "can be created as a admin user" do
-      user = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'me@me.com', password: 'secret', role: 2)
-
-
-      expect(user.role).to eq("admin")
-      expect(user.admin?).to be_truthy
+      expect(admin_user.role).to eq("admin")
+      expect(admin_user.admin?).to be_truthy
     end
   end
 end
