@@ -13,16 +13,18 @@
 </section>
 <h3>Statistics</h3>
 <section class="statistics-top-5">
-  <% @items.top_five.each do |item| %>
-    <ol>
-      <li><%= item.name %>: <%= item.total_ordered %></li>
-    </ol>
+  <p>Top 5 Most Popular Items</p>
+  <ol>
+  <% @items.top_five.each do |item_order| %>
+      <li><%= item_order.item.name %>: </li>
   <% end %>
+  </ol>
 </section>
 <section class="statistics-bottom-5">
-  <% @items.bottom_five.each do |item| %>
-    <ol>
-      <li><%= item.name %>: <%= item.total_ordered %></li>
-    </ol>
+  <p>5 Least Popular Items</p>
+  <ol>
+  <% @items.bottom_five.each do |item_order| %>
+      <li><%= item_order.item.name %>: </li>
   <% end %>
+  </ol>
 </section>
