@@ -11,3 +11,18 @@
     <%= render partial: '/partials/user_item_index', locals: {items: @items, merchant: @merchant} %>
   <% end %>
 </section>
+<h3>Statistics</h3>
+<section class="statistics-top-5">
+  <% @items.top_five.each do |item| %>
+    <ol>
+      <li><%= item.name %>: <%= item.total_ordered %></li>
+    </ol>
+  <% end %>
+</section>
+<section class="statistics-bottom-5">
+  <% @items.bottom_five.each do |item| %>
+    <ol>
+      <li><%= item.name %>: <%= item.total_ordered %></li>
+    </ol>
+  <% end %>
+</section>
