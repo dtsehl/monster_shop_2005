@@ -39,11 +39,14 @@ Rails.application.routes.draw do
   post "/orders",     to: "orders#create"
   get  "/orders/:id", to: "orders#show"
 
+  delete '/logout', to: 'sessions#destroy'
+
   namespace :merchant do
     get '/', to: 'dashboard#index'
   end
 
   namespace :admin do
     get '/', to: 'dashboard#index'
+    get '/users', to: 'users#index'
   end
 end
