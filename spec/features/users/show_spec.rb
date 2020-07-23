@@ -22,6 +22,5 @@ RSpec.describe 'As a registered user' do
 
       expect(page).to_not have_content(def_user.password)
     end
-
   end
 end
