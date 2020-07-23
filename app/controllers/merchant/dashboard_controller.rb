@@ -1,5 +1,5 @@
 class Merchant::DashboardController < ApplicationController
-    before_action :require_merchant
+  before_action :require_merchant
 
   def index
 
@@ -8,5 +8,4 @@ class Merchant::DashboardController < ApplicationController
   def require_merchant
     render file: "/public/404" unless current_merchant?
   end
-
 end
