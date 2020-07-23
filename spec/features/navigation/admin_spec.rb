@@ -48,7 +48,7 @@ RSpec.describe 'Site Navigation' do
       within 'nav' do
         click_link 'Logout'
       end
-      expect(current_path).to eq('/logout')
+      expect(current_path).to eq('/')
 
     end
 
