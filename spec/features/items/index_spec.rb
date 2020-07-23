@@ -44,7 +44,7 @@ RSpec.describe "Items Index Page" do
       end
     end
 
-    it 'does not display items that are inactive, and item images are links the item show page' do
+    it 'does not display items that are inactive, and item images are links to the item show page' do
       visit '/items'
 
       expect(page).to have_content(@tire.name)
