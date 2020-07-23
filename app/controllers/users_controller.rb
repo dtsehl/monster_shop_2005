@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
 
   def profile
-    require "pry"; binding.pry
-    @user = User.find(session[:user_id])
+    @user = current_user
+    render file: "/public/404" if !current_user
   end
 
   def new
