@@ -1,9 +1,9 @@
 class SessionsController < ApplicationController
   def new
-    if !session[:user_id].nil?
-      redirect_to '/profile' if current_user.role == "user"
-      redirect_to '/merchant/dashboard' if current_user.role == "merchant"
-      redirect_to '/admin/dashboard' if current_user.role == "admin"
+    if current_user
+      redirect_to '/admin/dashboard' if current_user.admin?
+      redirect_to '/merchant/dashboard' if current_user.merchant?
+      redirect_to '/profile' if current_user.user?
     end
   end
 
@@ -15,9 +15,9 @@ class SessionsController < ApplicationController
     elsif user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Hello, #{user.name}, you are now logged in."
-      redirect_to '/profile' if user.role == "user"
-      redirect_to '/merchant/dashboard' if user.role == "merchant"
-      redirect_to '/admin/dashboard' if user.role == "admin"
+      redirect_to '/admin/dashboard' if current_user.admin?
+      redirect_to '/merchant/dashboard' if current_user.merchant?
+      redirect_to '/profile' if current_user.user?
     end
   end
 
