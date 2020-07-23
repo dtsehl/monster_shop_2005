@@ -6,6 +6,18 @@ Rails.application.routes.draw do
   post '/register',    to: 'users#create'
   get  '/profile',  to: 'users#profile'
 
+  get '/login', to: 'sessions#new'
+  post '/login', to: 'sessions#create'
+  get '/logout', to: 'sessions#destroy'
+
+  namespace :merchant do
+    get '/dashboard', to: 'dashboard#index'
+  end
+
+  namespace :admin do
+    get '/dashboard', to: 'dashboard#index'
+  end
+
   get    "/merchants",          to: "merchants#index"
   get    "/merchants/new",      to: "merchants#new"
   get    "/merchants/:id",      to: "merchants#show"
