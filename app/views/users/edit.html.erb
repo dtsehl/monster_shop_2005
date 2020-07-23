@@ -1,0 +1,15 @@
+<%= form_tag "/profile", method: :patch do %>
+  <%= label_tag :name %>
+  <%= text_field_tag :name, (if current_user.present? then current_user.name else nil end) %>
+  <%= label_tag :address %>
+  <%= text_field_tag :address, (if current_user.present? then current_user.address else nil end) %>
+  <%= label_tag :city %>
+  <%= text_field_tag :city, (if current_user.present? then current_user.city else nil end) %>
+  <%= label_tag :state %>
+  <%= text_field_tag :state, (if current_user.present? then current_user.state else nil end) %>
+  <%= label_tag :zip %>
+  <%= text_field_tag :zip, (if current_user.present? then current_user.zip else nil end) %>
+  <%= label_tag :email %>
+  <%= text_field_tag :email, (if current_user.present? then current_user.email else nil end) %>
+  <%= submit_tag "Submit" %>
+<% end %>
