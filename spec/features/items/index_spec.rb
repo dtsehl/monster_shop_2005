@@ -65,16 +65,18 @@ RSpec.describe "Items Index Page" do
        bed = @brian.items.create(name: "Dog Bed", description: "Sleepy time!", price: 21, image: "https://images-na.ssl-images-amazon.com/images/I/71IvYiQYcAL._AC_SY450_.jpg", inventory: 40)
 
        order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
-       order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 7)
+       order_2 = Order.create!(name: 'Yo', address: 'Whatever', city: 'Place', state: 'PA', zip: 17033)
+
+       order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 4)
+       order_2.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
        order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 6)
-       order_1.item_orders.create!(item: bed, price: bed.price, quantity: 5)
+       order_2.item_orders.create!(item: bed, price: bed.price, quantity: 5)
        order_1.item_orders.create!(item: kong, price: kong.price, quantity: 4)
        order_1.item_orders.create!(item: bike_tool, price: bike_tool.price, quantity: 3)
-       order_1.item_orders.create!(item: bike_chain, price: bike_chain.price, quantity: 2)
-       order_1.item_orders.create!(item: bike_pump, price: bike_pump.price, quantity: 1)
+       order_2.item_orders.create!(item: bike_chain, price: bike_chain.price, quantity: 2)
+       order_2.item_orders.create!(item: bike_pump, price: bike_pump.price, quantity: 1)
 
       visit '/items'
-      save_and_open_page
       expect(page).to have_content("Statistics")
       within ".statistics-top-5" do
         expect(page.all('li')[0]).to have_content("#{@pull_toy.name}")

@@ -25,12 +25,19 @@ class Item < ApplicationRecord
   end
 
   def self.top_five
-    items = ItemOrder.all
-    items.order(quantity: :desc).limit(5)
+    # lines 29-31 (except.first(5) into a item_order model method to call from top_five and bottom_five
+    item_orders = ItemOrder.group(:item_id).sum(:quantity)
+    sorted_quantities = Hash[item_orders.sort_by{|k, v| v}.reverse]
+    sorted_quantities.map{ |i, v| Item.find(i) }.first(5)
+
   end
 
   def self.bottom_five
-    items = ItemOrder.all
-    items.order(:quantity).limit(5)
+    item_orders = ItemOrder.group(:item_id).sum(:quantity)
+    sorted_quantities = Hash[item_orders.sort_by{|k, v| v}]
+    sorted_quantities.map{ |i, v| Item.find(i) }.first(5)
   end
 end
+# get item names from items
+# sum quantity per item in item_orders
+#
