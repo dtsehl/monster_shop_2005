@@ -25,6 +25,7 @@ group :development, :test do
   gem 'shoulda-matchers'
   gem 'nyan-cat-formatter'
   gem 'bcrypt'
+  gem 'orderly'
 end
 
 group :development do
