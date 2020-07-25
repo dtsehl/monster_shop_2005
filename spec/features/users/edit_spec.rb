@@ -36,5 +36,26 @@ RSpec.describe 'As a registered user' do
 
       expect(page).to have_content("Joe")
     end
+    it "allows me to click a link to edit my password" do
+      def_user = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret')
+
+      visit '/login'
+
+      fill_in :email, with: def_user.email
+      fill_in :password, with: def_user.password
+
+      click_button "Log In"
+
+      click_on "Edit Password"
+
+      expect(current_path).to eq("/profile/edit_password")
+
+      expect(page).to have_field('Password')
+      expect(page).to have_field('Password confirmation')
+      click_on "Submit"
+
+      expect(current_path).to eq("/profile")
+      expect(page).to have_content("Password Updated")
+    end
   end
 end
