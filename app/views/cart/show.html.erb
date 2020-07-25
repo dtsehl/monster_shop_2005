@@ -36,6 +36,9 @@
         <% if item.inventory > quantity %>
           <%= button_to "+", "/cart/#{item.id}/increase", method: :patch %>
         <% end %>
+        <% if quantity > 0 %>
+          <%= button_to "-", "/cart/#{item.id}/decrease", method: :patch %>
+        <% end %>
         </td>
       <td>
         <p><%=number_to_currency(cart.subtotal(item))%></p>
