@@ -12,11 +12,10 @@ RSpec.describe 'Cart show page' do
     click_on "Add To Cart"
 
     visit '/cart'
-    save_and_open_page
     expect(page).to have_content('You must register or log in to checkout!')
     expect(page).to have_link('register')
     expect(page).to have_link('log in')
-    expect(page).to_not have_button_or_link('Checkout')
+    expect(page).to_not have_link('Checkout')
 
     click_link 'register'
     expect(current_path).to eq('/register')
