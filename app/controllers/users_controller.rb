@@ -48,10 +48,6 @@ class UsersController < ApplicationController
     end
   end
 
-  def orders
-    @orders = User.find(session[:user_id]).orders
-  end
-
   private
 
   def user_params

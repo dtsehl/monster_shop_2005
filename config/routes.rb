@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   patch '/profile', to: 'users#update'
   get '/profile/edit_password', to: 'users#edit_password'
   patch '/profile/update_password', to: 'users#update_password'
-  get '/profile/orders', to: 'users#orders'
+
+  get '/profile/orders', to: 'user_orders#index'
+  get '/profile/orders/:order_id', to: 'user_orders#show'
 
   get '/login', to: 'sessions#new'
   post '/login', to: 'sessions#create'

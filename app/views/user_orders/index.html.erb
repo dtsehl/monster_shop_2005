@@ -1,0 +1,14 @@
+<h2>Orders</h2>
+<% @orders.each do |order| %>
+  <p>
+    <tr id= "order-<%=order.id%>">
+    Order ID: <%= link_to "#{order.id}", "orders/#{order.id}" %>
+    <br>
+    Created at: <%= order.created_at %>
+    Updated at: <%= order.updated_at %>
+    Order Status: <%= order.status %>
+    Total quantity of items: <%= order.total_quantity %>
+    Grand total: <%= order.grand_total %>
+  </p>
+    </tr>
+<% end %>
