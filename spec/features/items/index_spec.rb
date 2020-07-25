@@ -77,7 +77,6 @@ RSpec.describe "Items Index Page" do
        order_2.item_orders.create!(item: bike_pump, price: bike_pump.price, quantity: 1)
 
       visit '/items'
-      save_and_open_page
       expect(page).to have_content("Statistics")
       within ".statistics-top-5" do
         expect(page.all('li')[0]).to have_content("#{@pull_toy.name}")
