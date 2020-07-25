@@ -15,16 +15,16 @@
 <section class="statistics-top-5">
   <p>Top 5 Most Popular Items</p>
   <ol>
-  <% @items.top_five.each do |item_order| %>
-      <li><%= item_order.item.name %>: </li>
+  <% @items.top_five.each do |item| %>
+      <li><%= item.name %>: <%= item.quantity_ordered(item.id) %></li>
   <% end %>
   </ol>
 </section>
 <section class="statistics-bottom-5">
   <p>5 Least Popular Items</p>
   <ol>
-  <% @items.bottom_five.each do |item_order| %>
-      <li><%= item_order.item.name %>: </li>
+  <% @items.bottom_five.each do |item| %>
+      <li><%= item.name %>: <%= item.quantity_ordered(item.id) %></li>
   <% end %>
   </ol>
 </section>

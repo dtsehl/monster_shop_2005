@@ -77,6 +77,7 @@ RSpec.describe "Items Index Page" do
        order_2.item_orders.create!(item: bike_pump, price: bike_pump.price, quantity: 1)
 
       visit '/items'
+      save_and_open_page
       expect(page).to have_content("Statistics")
       within ".statistics-top-5" do
         expect(page.all('li')[0]).to have_content("#{@pull_toy.name}")
@@ -85,7 +86,7 @@ RSpec.describe "Items Index Page" do
         expect(page.all('li')[3]).to have_content("#{kong.name}")
         expect(page.all('li')[4]).to have_content("#{bike_tool.name}")
 
-        # expect(page).to have_content("#{@pull_toy.name}: 7")
+        expect(page).to have_content("#{@pull_toy.name}: 7")
       end
       within ".statistics-bottom-5" do
         expect(page.all('li')[0]).to have_content("#{bike_pump.name}")
@@ -94,7 +95,7 @@ RSpec.describe "Items Index Page" do
         expect(page.all('li')[3]).to have_content("#{kong.name}")
         expect(page.all('li')[4]).to have_content("#{bed.name}")
 
-        # expect(page).to have_content("#{kong.name}: 4")
+        expect(page).to have_content("#{kong.name}: 4")
       end
     end
   end

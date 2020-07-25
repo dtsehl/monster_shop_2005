@@ -37,6 +37,10 @@ class Item < ApplicationRecord
     sorted_quantities = Hash[item_orders.sort_by{|k, v| v}]
     sorted_quantities.map{ |i, v| Item.find(i) }.first(5)
   end
+
+  def quantity_ordered(id)
+    ItemOrder.where("item_id = ?", "#{id}").sum(:quantity)
+  end
 end
 # get item names from items
 # sum quantity per item in item_orders
