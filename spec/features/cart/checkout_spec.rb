@@ -18,7 +18,13 @@ RSpec.describe 'Cart show' do
       @items_in_cart = [@paper,@tire,@pencil]
     end
 
-    it 'Theres a link to checkout' do
+    it 'Theres a link to checkout if a user is logged in' do
+      user = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret')
+      visit '/login'
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+      click_button "Log In"
+
       visit "/cart"
 
       expect(page).to have_link("Checkout")
@@ -31,6 +37,12 @@ RSpec.describe 'Cart show' do
 
   describe 'When I havent added items to my cart' do
     it 'There is not a link to checkout' do
+      user = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret')
+      visit '/login'
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+      click_button "Log In"
+      
       visit "/cart"
 
       expect(page).to_not have_link("Checkout")
