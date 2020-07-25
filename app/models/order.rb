@@ -12,6 +12,7 @@ class Order < ApplicationRecord
   end
 
   def status
-    # if item_orders for this order are all fulfilled then :status = packaged
+    return "Packaged" if self.item_orders.where('status = ?', 'Pending').count == 0
+    "Pending"
   end
 end
