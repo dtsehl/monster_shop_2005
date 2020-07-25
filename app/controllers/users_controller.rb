@@ -32,7 +32,7 @@ class UsersController < ApplicationController
       redirect_to "/profile"
     else
       flash[:error] = @user.errors.full_messages.to_sentence
-      render :edit
+      redirect_to "/profile/edit"
     end
   end
 

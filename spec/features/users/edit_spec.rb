@@ -57,5 +57,29 @@ RSpec.describe 'As a registered user' do
       expect(current_path).to eq("/profile")
       expect(page).to have_content("Password Updated")
     end
+    it "does not allow me to change my email if it is already in use by another user" do
+      def_user_1 = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret')
+      def_user_2 = User.create!(name: 'Joe', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjoe@me.com', password: 'secret')
+
+      visit '/login'
+
+      fill_in :email, with: def_user_1.email
+      fill_in :password, with: def_user_1.password
+
+      click_button "Log In"
+
+      expect(page).to have_content("Bob")
+
+      click_on "Edit Profile"
+
+      fill_in :email, with: "regularjoe@me.com"
+      click_on "Submit"
+
+      expect(current_path).to eq("/profile/edit")
+
+      expect(page).to have_field('Name', with: def_user_1.name)
+
+      expect(page).to have_content("Email has already been taken")
+    end
   end
 end
