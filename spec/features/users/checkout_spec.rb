@@ -17,6 +17,7 @@ RSpec.describe 'User can checkout' do
     visit "/items/#{pencil.id}"
     click_on "Add To Cart"
 
+    visit '/cart'
     click_link 'Checkout'
 
     expect(current_path).to eq('/orders/new')
