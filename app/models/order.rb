@@ -10,4 +10,9 @@ class Order < ApplicationRecord
   def grand_total
     item_orders.sum('price * quantity')
   end
+
+  def status
+    return "Packaged" if self.item_orders.where('status = ?', 'Pending').count == 0
+    "Pending"
+  end
 end
