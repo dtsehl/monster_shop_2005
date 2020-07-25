@@ -39,25 +39,19 @@ RSpec.describe 'Cart creation' do
 
       visit "/cart"
 
-      within "#cart-item-#{eraser}" do
+      within "#cart-item-#{eraser.id}" do
         expect(page).to have_content("1")
         expect(page).to have_button("+")
         click_on "+"
-        expect(page).to have_content("2")
       end
-      within "#cart-item-#{eraser}" do
-        expect(page).to have_content("1")
+
+      within "#cart-item-#{eraser.id}" do
+        expect(page).to have_content("2")
         expect(page).to have_button("+")
         click_on "+"
-        expect(page).to have_content("2")
       end
-      within "#cart-item-#{eraser}" do
-        expect(page).to have_content("1")
-        expect(page).to have_button("+")
-        click_on "+"
-        expect(page).to have_content("2")
-      end
-      within "#cart-item-#{eraser}" do
+      within "#cart-item-#{eraser.id}" do
+        expect(page).to have_content("3")
         expect(page).to_not have_button("+")
       end
       within 'nav' do
