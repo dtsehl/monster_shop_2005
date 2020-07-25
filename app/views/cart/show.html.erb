@@ -1,7 +1,9 @@
 <h1>Cart</h1>
-<% if !current_user %>
-  <p>You must <%= link_to 'register', '/register' %> or <%= link_to 'log in', '/login' %> to checkout!
-<% end %>
+<center>
+  <% if !current_user %>
+    <p>You must <%= link_to 'register', '/register' %> or <%= link_to 'log in', '/login' %> to checkout!
+  <% end %>
+</center>
 <% if !@items.empty? %>
 <center>
 <table class = "cart-items">
