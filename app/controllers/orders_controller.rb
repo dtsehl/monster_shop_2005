@@ -16,8 +16,10 @@ class OrdersController < ApplicationController
           price: item.price
           })
       end
+      order.user_orders.create({order_id: order.id, user_id: session[:user_id]})
       session.delete(:cart)
-      redirect_to "/orders/#{order.id}"
+      flash[:success] = 'Order created!'
+      redirect_to "/profile/orders"
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new
