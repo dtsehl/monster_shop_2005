@@ -20,4 +20,14 @@ class CartController < ApplicationController
     session[:cart].delete(params[:item_id])
     redirect_to '/cart'
   end
+
+  def increase_quantity
+    item = Item.find(params[:item_id])
+    if item.inventory > session[:cart][params[:item_id]]
+      session[:cart][params[:item_id]] += 1
+      redirect_to '/cart'
+    else
+      redirect_to '/cart'
+    end
+  end
 end
