@@ -1,5 +1,5 @@
 class Order < ApplicationRecord
-  validates_presence_of :name, :address, :city, :state, :zip, :status
+  validates_presence_of :name, :address, :city, :state, :zip
 
   has_many :item_orders
   has_many :items, through: :item_orders
@@ -9,5 +9,9 @@ class Order < ApplicationRecord
 
   def grand_total
     item_orders.sum('price * quantity')
+  end
+
+  def status
+    # if item_orders for this order are all fulfilled then :status = packaged
   end
 end
