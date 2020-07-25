@@ -1,14 +1,14 @@
-# When I fill out all information on the new order page
-# And click on 'Create Order'
-# An order is created and saved in the database
-# And I am redirected to that order's show page with the following information:
-#
-# - Details of the order:
+require 'rails_helper'
 
-# - the date when the order was created
 RSpec.describe("Order Creation") do
   describe "When I check out from my cart" do
     before(:each) do
+      user = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret')
+      visit '/login'
+      fill_in :email, with: user.email
+      fill_in :password, with: user.password
+      click_button "Log In"
+
       @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
@@ -45,7 +45,9 @@ RSpec.describe("Order Creation") do
 
       new_order = Order.last
 
-      expect(current_path).to eq("/orders/#{new_order.id}")
+      expect(current_path).to eq("/profile/orders")
+
+      visit "/orders/#{new_order.id}"
 
       within '.shipping-address' do
         expect(page).to have_content(name)
@@ -106,7 +108,5 @@ RSpec.describe("Order Creation") do
       expect(page).to have_content("Please complete address form to create an order.")
       expect(page).to have_button("Create Order")
     end
-
-
   end
 end
