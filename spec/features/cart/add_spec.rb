@@ -32,6 +32,7 @@ RSpec.describe 'Cart creation' do
         expect(page).to have_content("Cart: 2")
       end
     end
+
     it "I can increment the quantity of an item in my cart, but not beyond the item's inventory size" do
       eraser = @mike.items.create(name: "Pink Eraser", description: "Great for erasing things!", price: 5, image: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Pink_Pearl_eraser.jpg", inventory: 3)
       visit "/items/#{eraser.id}"
@@ -56,6 +57,47 @@ RSpec.describe 'Cart creation' do
       end
       within 'nav' do
         expect(page).to have_content("Cart: 3")
+      end
+    end
+
+    it "I can decrement the quantity of an item in my cart, but not beyond zero" do
+      eraser = @mike.items.create(name: "Pink Eraser", description: "Great for erasing things!", price: 5, image: "https://upload.wikimedia.org/wikipedia/commons/2/2f/Pink_Pearl_eraser.jpg", inventory: 3)
+      visit "/items/#{eraser.id}"
+      click_on "Add To Cart"
+
+      visit "/cart"
+
+      expect(page).to have_content(eraser.name)
+
+      within "#cart-item-#{eraser.id}" do
+        expect(page).to have_content("1")
+        expect(page).to have_button("-")
+        click_on "+"
+        click_on "+"
+      end
+
+      within "#cart-item-#{eraser.id}" do
+        expect(page).to have_content("3")
+        expect(page).to have_button("-")
+        click_on "-"
+      end
+
+      within "#cart-item-#{eraser.id}" do
+        expect(page).to have_content("2")
+        expect(page).to have_button("-")
+        click_on "-"
+      end
+
+      within "#cart-item-#{eraser.id}" do
+        expect(page).to have_content("1")
+        expect(page).to have_button("-")
+        click_on "-"
+      end
+
+      expect(page).to_not have_content(eraser.name)
+
+      within 'nav' do
+        expect(page).to have_content("Cart: 0")
       end
     end
   end
