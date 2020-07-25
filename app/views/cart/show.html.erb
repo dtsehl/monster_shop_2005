@@ -33,6 +33,9 @@
           <p><%=quantity%></p>
           <p><%= link_to "Remove", "/cart/#{item.id}",method: :delete %></p>
         </center>
+        <% if item.inventory > quantity %>
+          <%= button_to "+", "/cart/#{item.id}/increase", method: :patch %>
+        <% end %>
         </td>
       <td>
         <p><%=number_to_currency(cart.subtotal(item))%></p>
