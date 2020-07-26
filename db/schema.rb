@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20200725223658) do
     t.integer "zip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "status", default: "Pending"
   end
 
   create_table "reviews", force: :cascade do |t|

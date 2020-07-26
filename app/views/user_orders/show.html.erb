@@ -1,0 +1,22 @@
+<h2>Order Details</h2>
+<p>
+  Order ID: <%= link_to "#{@order.id}", "orders/#{@order.id}" %>
+  <br>
+  Created at: <%= @order.created_at %>
+  Updated at: <%= @order.updated_at %>
+  Order Status: <%= @order.status %>
+  Total quantity of items: <%= @order.total_quantity %>
+  Grand total: <%= @order.grand_total %>
+</p>
+<% @items.each do |item| %>
+  <tr id= "item-<%=item.id%>">
+    <p>
+      Item name: <%= item.name %>
+      Item description: <%= item.description %>
+      Item thumbnail: <%= item.image %>
+      Item quantity: <%= @order.item_quantity(item) %>
+      Item price: <%= number_to_currency(item.price) %>
+      Item subtotal: <%= number_to_currency(@order.item_subtotal(item)) %>
+    </p>
+  </tr>
+<% end %>
