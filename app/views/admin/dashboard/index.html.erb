@@ -1,1 +1,53 @@
 <h1>Welcome Admin!</h1>
+  <section class='orders'>
+    <ul class='packaged'>
+      <% @orders.by_status('Packaged').each do |order| %>
+        <li id="order-<%= order.id %>">
+          <%= link_to order.id, "/orders/#{order.id}" %>: Packaged
+          <br>
+          <%= order.name %>
+          <br>
+          <%= order.created_at %>
+          <br>
+          <%= button_to "Ship Order", "/admin/orders/#{order.id}", method: :patch %>
+          <br>
+        </li>
+      <% end %>
+    </ul>
+    <ul class='pending'>
+      <% @orders.by_status('Pending').each do |order| %>
+        <li id="order-<%= order.id %>">
+          <%= link_to order.id, "/orders/#{order.id}" %>: Pending
+          <br>
+          <%= order.name %>
+          <br>
+          <%= order.created_at %>
+          <br>
+        </li>
+      <% end %>
+    </ul>
+    <ul class='shipped'>
+      <% @orders.by_status('Shipped').each do |order| %>
+      <li id="order-<%= order.id %>">
+        <%= link_to order.id, "/orders/#{order.id}" %>: Shipped
+        <br>
+        <%= order.name %>
+        <br>
+        <%= order.created_at %>
+        <br>
+      </li>
+      <% end %>
+    </ul>
+    <ul class='cancelled'>
+      <% @orders.by_status('Cancelled').each do |order| %>
+      <li id="order-<%= order.id %>">
+        <%= link_to order.id, "/orders/#{order.id}" %>: Cancelled
+        <br>
+        <%= order.name %>
+        <br>
+        <%= order.created_at %>
+        <br>
+      </li>
+      <% end %>
+    </ul>
+  </section>
