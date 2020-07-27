@@ -1,6 +1,6 @@
 <h2>Order Details</h2>
 <p>
-  Order ID: <%= link_to "#{@order.id}", "orders/#{@order.id}" %>
+  Order ID: <%= @order.id %>
   <br>
   Created at: <%= @order.created_at %>
   Updated at: <%= @order.updated_at %>
@@ -8,6 +8,11 @@
   Total quantity of items: <%= @order.total_quantity %>
   Grand total: <%= @order.grand_total %>
 </p>
+<% if @order.status != 'Shipped' %>
+  <p>
+  <%= button_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %>
+  </p>
+<% end %>
 <% @items.each do |item| %>
   <tr id= "item-<%=item.id%>">
     <p>
@@ -17,6 +22,9 @@
       Item quantity: <%= @order.item_quantity(item) %>
       Item price: <%= number_to_currency(item.price) %>
       Item subtotal: <%= number_to_currency(@order.item_subtotal(item)) %>
+      <% if current_merchant? %>
+      <%= link_to "Fulfill Item", "/merchant/orders/#{@order.id}?item_id=#{item.id}", method: :patch %>
+      <% end %>
     </p>
   </tr>
 <% end %>

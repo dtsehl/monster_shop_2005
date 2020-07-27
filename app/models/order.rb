@@ -15,16 +15,15 @@ class Order < ApplicationRecord
     item_orders.sum('quantity')
   end
 
-  def status
-    return "Packaged" if self.item_orders.where('status = ?', 'Pending').count == 0
-    "Pending"
-  end
-
   def item_quantity(item)
     ItemOrder.where("order_id = ?", self.id).where("item_id = ?", item.id).first.quantity
   end
 
   def item_subtotal(item)
     ItemOrder.where("order_id = ?", self.id).where("item_id = ?", item.id).first.quantity * item.price
+  end
+
+  def self.by_status(status)
+    self.where('status = ?', status)
   end
 end
