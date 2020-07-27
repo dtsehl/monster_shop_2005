@@ -8,9 +8,11 @@
   Total quantity of items: <%= @order.total_quantity %>
   Grand total: <%= @order.grand_total %>
 </p>
-<p>
-<%= button_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %>
-</p>
+<% if @order.status != 'Shipped' %>
+  <p>
+  <%= button_to "Cancel Order", "/profile/orders/#{@order.id}", method: :patch %>
+  </p>
+<% end %>
 <% @items.each do |item| %>
   <tr id= "item-<%=item.id%>">
     <p>
