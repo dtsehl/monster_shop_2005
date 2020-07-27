@@ -33,4 +33,18 @@ describe Order, type: :model do
       expect(@order_1.grand_total).to eq(230)
     end
   end
+
+  describe 'class methods' do
+    it '.by_status' do
+      order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, status: 'Packaged')
+      order_2 = Order.create!(name: 'Yo', address: 'Whatever', city: 'Place', state: 'PA', zip: 17033, status: 'Pending')
+      order_3 = Order.create!(name: 'Brian', address: '456 Zanti St', city: 'Denver', state: 'CO', zip: 29834, status: 'Shipped')
+      order_4 = Order.create!(name: 'Cory', address: '789 Westerfield Ln', city: 'NYC', state: 'NY', zip: 98713, status: 'Cancelled')
+
+      expect(Order.by_status('Packaged')).to eq([order_1])
+      expect(Order.by_status('Pending')).to eq([order_2])
+      expect(Order.by_status('Shipped')).to eq([order_3])
+      expect(Order.by_status('Cancelled')).to eq([order_4])
+    end
+  end
 end
