@@ -49,6 +49,7 @@ Rails.application.routes.draw do
     patch '/update_password', to: 'users#update_password'
     get '/orders', to: 'user_orders#index'
     get '/orders/:order_id', to: 'user_orders#show'
+    patch '/orders/:order_id', to: 'user_orders#cancel_order'
   end
 
   namespace :merchant do
