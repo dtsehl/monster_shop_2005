@@ -18,7 +18,7 @@ RSpec.describe 'Admin dashboard' do
     user.user_orders.create!(user_id: user.id, order_id: order_1.id)
 
     visit '/admin'
-    save_and_open_page
+
     within '.orders' do
       expect(page.all('li')[0]).to have_content("#{order_1.id}: Packaged")
       expect(page.all('li')[1]).to have_content("#{order_2.id}: Pending")
@@ -31,7 +31,7 @@ RSpec.describe 'Admin dashboard' do
       expect(page).to have_content(order_1.name)
       expect(page).to have_content(order_1.created_at)
       click_button 'Ship Order'
-      expect(page).to have_content("#{order_1.name}: Shipped")
+      expect(page).to have_content("#{order_1.id}: Shipped")
     end
 
     visit '/logout'
@@ -43,6 +43,6 @@ RSpec.describe 'Admin dashboard' do
 
     visit "/profile/orders/#{order_1.id}"
 
-    expect(page).to_not have_link('Cancel Order')
+    expect(page).to_not have_button('Cancel Order')
   end
 end
