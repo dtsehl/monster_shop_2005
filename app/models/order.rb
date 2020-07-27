@@ -22,4 +22,8 @@ class Order < ApplicationRecord
   def item_subtotal(item)
     ItemOrder.where("order_id = ?", self.id).where("item_id = ?", item.id).first.quantity * item.price
   end
+
+  def self.by_status(status)
+    self.where('status = ?', status)
+  end
 end
