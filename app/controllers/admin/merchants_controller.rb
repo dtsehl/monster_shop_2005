@@ -6,9 +6,13 @@ class Admin::MerchantsController < ApplicationController
 
   def enable_disable
     merchant = Merchant.find(params[:merchant_id])
+    merchant_items =  Item.where("merchant_id = ?", "#{merchant.id}")
+
     if merchant.enabled?
-      merchant.enabled = false
-      merchant.save
+      merchant.toggle!(:enabled)
+      merchant_items.each do |item|
+        item.toggle!(:active?)
+      end
       redirect_to request.referrer
       flash[:notice] = "#{merchant.name} has been disabled"
     end
