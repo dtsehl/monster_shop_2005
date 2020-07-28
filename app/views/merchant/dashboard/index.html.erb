@@ -8,8 +8,8 @@
     <ul id="merchant-orders-<%=order.id%>">
       <li><%= link_to order.id, "/merchant/orders/#{order.id}" %></li>
       <li>Created On: <%= order.created_at %></li>
-      <li>Total Quantity of <%= order.name %> Items in Order: <%= order.total_merchant_quantity(order.id, @merchant.id)%></li>
-      <li>Total Value of <%= order.name %> Items in Order: <%= order.total_merchant_value(order.id, @merchant.id) %></li>
+      <li>Total Quantity of <%= @merchant.name %> Items in Order: <%= order.total_merchant_quantity(@merchant.id)%></li>
+      <li>Total Value of <%= @merchant.name %> Items in Order: <%= order.total_merchant_value(@merchant.id) %></li>
   <% end  %>
 </section>
 
