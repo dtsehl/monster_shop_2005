@@ -2,8 +2,10 @@ class Merchant::DashboardController < ApplicationController
   before_action :require_merchant
 
   def index
-
+    @merchant = Merchant.find(current_user.merchant_id)
+    @pending_orders = @merchant.orders.where('orders.status = ?', 'Pending').distinct
   end
+  # need order objects, specifically show pending orders -> id, date created, total from merchant, total value
 
   def fulfill_item
     item_order = ItemOrder.where('item_id=?', params[:item_id]).where('order_id=?', params[:order_id]).first
