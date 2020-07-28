@@ -2,7 +2,12 @@ class Merchant::DashboardController < ApplicationController
   before_action :require_merchant
 
   def index
+    @merchant = Merchant.find(current_user.merchant_id)
+    @pending_orders = @merchant.orders.where('orders.status = ?', 'Pending').distinct
+  end
 
+  def show
+    @order = Order.find(params[:order_id])
   end
 
   def fulfill_item

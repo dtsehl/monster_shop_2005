@@ -90,6 +90,8 @@ ActiveRecord::Schema.define(version: 20200728025016) do
     t.integer "role", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "merchant_id"
+    t.index ["merchant_id"], name: "index_users_on_merchant_id"
   end
 
   add_foreign_key "item_orders", "items"
@@ -98,4 +100,5 @@ ActiveRecord::Schema.define(version: 20200728025016) do
   add_foreign_key "reviews", "items"
   add_foreign_key "user_orders", "orders"
   add_foreign_key "user_orders", "users"
+  add_foreign_key "users", "merchants"
 end

@@ -1,0 +1,16 @@
+<h1>Merchant Name: <%= @merchant.name %></h1>
+<h3>Merchant Address: <%= @merchant.address %>,
+  <br> <%= @merchant.city %>, <%= @merchant.state %>, <%= @merchant.zip %>
+</h3>
+
+<section>
+  <% @pending_orders.each do |order| %>
+    <ul id="merchant-orders-<%=order.id%>">
+      <li><%= link_to order.id, "/merchant/orders/#{order.id}" %></li>
+      <li>Created On: <%= order.created_at %></li>
+      <li>Total Quantity of <%= @merchant.name %> Items in Order: <%= order.total_merchant_quantity(@merchant.id)%></li>
+      <li>Total Value of <%= @merchant.name %> Items in Order: <%= order.total_merchant_value(@merchant.id) %></li>
+  <% end  %>
+</section>
+
+<%# need order objects, specifically show pending orders -> id, date created, total from merchant, total value %>

@@ -29,8 +29,17 @@ describe Order, type: :model do
       @order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
       @order_1.item_orders.create!(item: @pull_toy, price: @pull_toy.price, quantity: 3)
     end
+
     it '#grand_total' do
       expect(@order_1.grand_total).to eq(230)
+    end
+
+    it "calculates total merchant quantity" do
+      expect(@order_1.total_merchant_quantity(@brian.id)).to eq(3)
+    end
+
+    it "calculates total merchant value" do
+      expect(@order_1.total_merchant_value(@brian.id)).to eq(30)
     end
   end
 
