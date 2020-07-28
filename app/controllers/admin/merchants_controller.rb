@@ -17,6 +17,9 @@ class Admin::MerchantsController < ApplicationController
       flash[:notice] = "#{merchant.name} has been disabled"
     else
       merchant.toggle!(:enabled)
+      merchant_items.each do |item|
+        item.toggle!(:active?)
+      end
       redirect_to request.referrer
       flash[:notice] = "#{merchant.name} has been enabled"
     end
