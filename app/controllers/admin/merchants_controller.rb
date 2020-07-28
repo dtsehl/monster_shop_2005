@@ -15,6 +15,10 @@ class Admin::MerchantsController < ApplicationController
       end
       redirect_to request.referrer
       flash[:notice] = "#{merchant.name} has been disabled"
+    else
+      merchant.toggle!(:enabled)
+      redirect_to request.referrer
+      flash[:notice] = "#{merchant.name} has been enabled"
     end
   end
 end
