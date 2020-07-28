@@ -5,12 +5,13 @@
       <tr id="merchant-<%= merchant.id %>">
         <section class = "grid-item">
           <h2><%= merchant.name %></h2> <br>
-          <% if merchant.enabled? %>
-            <%= "Status: Enabled" %>
-            <%= button_to "Disable", "merchants/#{merchant.id}", method: :patch %>
-            <% else %>
-            <%= "Status: Disabled" %>
-          <% end %>
+            <% if merchant.enabled? %>
+              <%= "Status: Enabled" %>
+              <%= button_to "Disable", "merchants/#{merchant.id}", method: :patch %>
+              <% else %>
+              <%= "Status: Disabled" %>
+              <%= button_to "Enable", "merchants/#{merchant.id}", method: :patch %>
+            <% end %>
         </section>
       </tr>
     <% end %>
