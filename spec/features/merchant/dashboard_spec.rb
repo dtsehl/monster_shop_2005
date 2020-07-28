@@ -53,8 +53,8 @@ RSpec.describe 'Merchant Employee Dashboard' do
     within "#merchant-orders-#{order_pending.id}" do
       expect(page).to have_link(order_pending.id)
       expect(page).to have_content("Created On: #{order_pending.created_at}")
-      expect(page).to have_content("Total Quantity of #{merchant.name} Items in Order: #{merchant_quantity}")
-      expect(page).to have_content("Total Value of #{merchant.name} Items in Order: #{merchant_value}")
+      expect(page).to have_content("Total Quantity of #{dog_shop.name} Items in Order: #{merchant_quantity}")
+      expect(page).to have_content("Total Value of #{dog_shop.name} Items in Order: #{merchant_value}")
       click_link "#{order_pending.id}"
       expect(current_path).to eq("/merchant/orders/#{order_pending.id}")
     end
