@@ -27,11 +27,11 @@ class Order < ApplicationRecord
     self.where('status = ?', status)
   end
 
-  def total_merchant_quantity(order_id, merchant_id)
-
+  def total_merchant_quantity(merchant_id)
+    Order.joins(:items).where('merchant_id = ? and order_id = ?', merchant_id, self.id).sum(:quantity)
   end
 
-  def total_merchant_value(order_id, merchant_id)
-
+  def total_merchant_value(merchant_id)
+    # Order.joins(:items).where('merchant_id = ? and order_id = ?', merchant_id, self.id).sum(:quantity)
   end
 end
