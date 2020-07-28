@@ -1,9 +1,7 @@
 class SessionsController < ApplicationController
   def new
     if current_user
-      redirect_to '/admin/dashboard' if current_user.admin?
-      redirect_to '/merchant/dashboard' if current_user.merchant?
-      redirect_to '/profile' if current_user.user?
+      status_redirect
     end
   end
 
@@ -15,9 +13,7 @@ class SessionsController < ApplicationController
     elsif user.authenticate(params[:password])
       session[:user_id] = user.id
       flash[:success] = "Hello, #{user.name}, you are now logged in."
-      redirect_to '/admin/dashboard' if current_user.admin?
-      redirect_to '/merchant/dashboard' if current_user.merchant?
-      redirect_to '/profile' if current_user.user?
+      status_redirect
     end
   end
 
@@ -27,4 +23,13 @@ class SessionsController < ApplicationController
     flash[:success] = "You have successfully logged out!"
     redirect_to '/'
   end
+
+  private
+
+  def status_redirect
+    redirect_to '/admin/dashboard' if current_user.admin?
+    redirect_to '/merchant/dashboard' if current_user.merchant?
+    redirect_to '/profile' if current_user.user?
+  end
+
 end

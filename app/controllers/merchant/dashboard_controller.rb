@@ -6,7 +6,7 @@ class Merchant::DashboardController < ApplicationController
   end
 
   def fulfill_item
-    item_order = ItemOrder.where('item_id=?', params[:item_id]).where('order_id=?', params[:order_id]).first
+    item_order = ItemOrder.where(item_id: params[:item_id], order_id: params[:order_id]).first
     item_order.status = "Fulfilled"
     item_order.save
     order = Order.find(params[:order_id])
