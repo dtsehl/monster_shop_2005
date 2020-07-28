@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Merchant Employee Dashboard' do
-  xit "shows name and full address of merchant" do
+  it "shows name and full address of merchant" do
     dog_shop = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
     merchant = User.create!(name: 'Jim', address: '456 Blah Blah Blvd', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjim@me.com', password: 'alsosecret', role: 1, merchant_id: dog_shop.id)
     address = "#{dog_shop.address}, #{dog_shop.city}, #{dog_shop.state}, #{dog_shop.zip}"
@@ -10,7 +10,6 @@ RSpec.describe 'Merchant Employee Dashboard' do
     fill_in :email, with: merchant.email
     fill_in :password, with: merchant.password
     click_button "Log In"
-     save_and_open_page
 
     expect(page).to have_content("Merchant Name: #{dog_shop.name}")
     expect(page).to have_content("Merchant Address: #{address}")
