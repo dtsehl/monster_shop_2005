@@ -32,6 +32,6 @@ class Order < ApplicationRecord
   end
 
   def total_merchant_value(merchant_id)
-    # Order.joins(:items).where('merchant_id = ? and order_id = ?', merchant_id, self.id).sum(:quantity)
+    (Order.joins(:items).where('merchant_id = ? and order_id = ?', merchant_id, self.id).group('items.id').sum('item_orders.quantity * item_orders.price')).values.sum
   end
 end
