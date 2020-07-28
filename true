@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20200728024717_add_enabled_to_merchants.rb
