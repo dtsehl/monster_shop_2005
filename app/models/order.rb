@@ -26,4 +26,12 @@ class Order < ApplicationRecord
   def self.by_status(status)
     self.where('status = ?', status)
   end
+
+  def total_merchant_quantity(order_id, merchant_id)
+
+  end
+
+  def total_merchant_value(order_id, merchant_id)
+
+  end
 end
