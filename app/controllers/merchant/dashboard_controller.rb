@@ -5,7 +5,10 @@ class Merchant::DashboardController < ApplicationController
     @merchant = Merchant.find(current_user.merchant_id)
     @pending_orders = @merchant.orders.where('orders.status = ?', 'Pending').distinct
   end
-  # need order objects, specifically show pending orders -> id, date created, total from merchant, total value
+
+  def show
+    @order = Order.find(params[:order_id])
+  end
 
   def fulfill_item
     item_order = ItemOrder.where('item_id=?', params[:item_id]).where('order_id=?', params[:order_id]).first
