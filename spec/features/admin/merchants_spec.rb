@@ -144,5 +144,26 @@ RSpec.describe "As an Admin" do
       expect(bike_pump.active?).to eq(true)
       expect(bike_chain.active?).to eq(true)
     end
+
+    it "Displays the merchant's city and state, and a disable/enable button" do
+      bike_shop = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+      admin = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret', role: 2)
+
+      visit '/login'
+      fill_in :email, with: admin.email
+      fill_in :password, with: admin.password
+      click_button "Log In"
+
+      visit '/admin/merchants'
+
+      within "#merchant-#{bike_shop.id}" do
+        expect(page).to have_content(bike_shop.city)
+        expect(page).to have_content(bike_shop.state)
+        expect(page).to have_link(bike_shop.name)
+        click_on bike_shop.name
+      end
+
+      expect(current_path).to eq("/admin/merchants/#{bike_shop.id}")
+    end
   end
 end

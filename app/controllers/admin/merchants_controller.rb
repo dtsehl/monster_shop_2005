@@ -24,4 +24,8 @@ class Admin::MerchantsController < ApplicationController
       flash[:notice] = "#{merchant.name} has been enabled"
     end
   end
+
+  def show
+
+  end
 end
