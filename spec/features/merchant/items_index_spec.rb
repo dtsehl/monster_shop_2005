@@ -46,5 +46,15 @@ RSpec.describe 'Merchant items index' do
     within "#item-#{pull_toy.id}" do
       expect(page).to have_content("Status: Inactive")
     end
+
+    within "#item-#{pull_toy.id}" do
+      click_link "Activate Item"
+    end
+
+    expect(page).to have_content("Item activated!")
+
+    within "#item-#{pull_toy.id}" do
+      expect(page).to have_content("Status: Active")
+    end
   end
 end
