@@ -1,14 +1,31 @@
 <h2><%= @merchant.name %> Items</h2>
-<p>
+<section>
   <ul>
     <% @merchant.items.each do |item| %>
-      <li>
-        <%= item.image %>
+      <li id="item-<%= item.id %>">
+        <%= image_tag item.image %>
         <br>
         <%= item.name %>
         <br>
+        <%= item.description %>
+        <br>
         Price: <%= number_to_currency(item.price) %>
         <br>
+        <% if item.active? %>
+          Status: Active
+        <% else %>
+          Status: Inactive
+        <% end %>
+        <br>
+        <%= item.inventory %>
+        <br>
+        <% if item.active? %>
+          <%= link_to "Deactivate Item", "/merchant/items/#{item.id}", method: :patch %>
+        <% else %>
+          <%= link_to "Activate Item", "/merchant/items/#{item.id}", method: :patch %>
+        <% end %>
+        <br>
       </li>
+      <br>
     <% end %>
-</p>
+</section>

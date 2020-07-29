@@ -28,6 +28,17 @@ class Merchant::DashboardController < ApplicationController
     @merchant = Merchant.find(params[:merchant_id])
   end
 
+  def update
+    item = Item.find(params[:item_id])
+    item.toggle!(:active?)
+    if item.active?
+      flash[:alert] = "Item activated!"
+    else
+      flash[:alert] = "Item deactivated!"
+    end
+    redirect_to request.referrer
+  end
+
   def require_merchant
     render file: "/public/404" unless current_merchant?
   end
