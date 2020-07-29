@@ -19,7 +19,7 @@ require 'rails_helper'
 # I see the new item on the page, and it is enabled and available for sale
 # If I left the image field blank, I see a placeholder image for the thumbnail
 
-RSpec.describe "When I visit my mercahnts items page" do
+RSpec.describe "When I visit my merchants items page" do
   it 'I see a link to add new items which takes me to a blank form' do
     dog_shop = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
     merchant = User.create!(name: 'Jim', address: '456 Blah Blah Blvd', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjim@me.com', password: 'alsosecret', role: 1, merchant_id: dog_shop.id)
@@ -43,19 +43,27 @@ RSpec.describe "When I visit my mercahnts items page" do
     name = 'Kong'
     description = 'Red and Rubbery'
     price = 3
-    image = 'https://www.vetzone.com.au/Portals/0/Classic-KONG1-700x700.jpg'
+    image = "https://www.vetzone.com.au/Portals/0/Classic-KONG1-700x700.jpg"
     inventory= 15
 
     fill_in "Name", with: name
     fill_in "Description", with: description
+    fill_in "Image", with: image
     fill_in "Price", with: price
     fill_in "Inventory", with: inventory
+
+    # fill_in :name, with: name
+    # fill_in :description, with: description
+    # fill_in :price, with: price
+    # fill_in :image, with: image
+    # fill_in :inventory, with: inventory
 
     click_button "Create Item"
 
     expect(current_path).to eq('/merchant/items')
 
     new_item = Item.last
+
     expect(page).to have_content("#{new_item.name} saved!")
 
     within "#item-#{new_item.id}" do
@@ -63,7 +71,7 @@ RSpec.describe "When I visit my mercahnts items page" do
       expect(page).to have_content(new_item.description)
       expect(page).to have_content(new_item.price)
       expect(page).to have_content(new_item.inventory)
-      expect(page).to have_content("generic-image-placeholder.png")
+      expect(page).to have_content("https://www.vetzone.com.au/Portals/0/Classic-KONG1-700x700.jpg")
       expect(page).to have_content("Active")
     end
   end
