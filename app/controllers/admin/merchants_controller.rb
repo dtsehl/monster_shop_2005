@@ -10,6 +10,10 @@ class Admin::MerchantsController < ApplicationController
     redirect_to request.referrer
   end
 
+  def show
+    @merchant = merchant
+  end
+
   private
 
   def merchant
