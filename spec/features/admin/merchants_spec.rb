@@ -166,9 +166,6 @@ RSpec.describe "As an Admin" do
       expect(current_path).to eq("/admin/merchants/#{bike_shop.id}")
     end
 
-    # And I click on a merchant's name,
-    # Then my URI route should be ("/admin/merchants/6")
-    # Then I see everything that merchant would see
     it "Merchants name is a link to thier respective show page" do
       bike_shop = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       admin = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret', role: 2)
