@@ -15,7 +15,7 @@ RSpec.describe("Order's status") do
     order_1.item_orders.create!(item: tire, price: tire.price, quantity: 6, status: 'Fulfilled')
     order_1.item_orders.create!(item: kong, price: kong.price, quantity: 4, status: 'Fulfilled')
     order_1.item_orders.create!(item: bike_tool, price: bike_tool.price, quantity: 3)
-    merchant = User.create!(name: 'Jim', address: '456 Blah Blah Blvd', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjim@me.com', password: 'alsosecret', role: 1)
+    merchant = User.create!(name: 'Jim', address: '456 Blah Blah Blvd', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjim@me.com', password: 'alsosecret', role: 1, merchant_id: bike_shop.id)
 
     visit '/login'
     fill_in :email, with: merchant.email
