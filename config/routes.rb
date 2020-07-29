@@ -66,7 +66,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'dashboard#index'
     patch '/orders/:order_id', to: 'dashboard#ship_order'
     get '/merchants', to: 'merchants#index'
-    patch '/merchants/:merchant_id', to: 'merchants#enable_disable'
+    patch '/merchants/:merchant_id', to: 'merchants#update'
     get '/merchants/:merchant_id', to: 'merchants#show'
   end
 end
