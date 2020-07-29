@@ -1,0 +1,14 @@
+<h2><%= @merchant.name %> Items</h2>
+<p>
+  <ul>
+    <% @merchant.items.each do |item| %>
+      <li>
+        <%= item.image %>
+        <br>
+        <%= item.name %>
+        <br>
+        Price: <%= number_to_currency(item.price) %>
+        <br>
+      </li>
+    <% end %>
+</p>

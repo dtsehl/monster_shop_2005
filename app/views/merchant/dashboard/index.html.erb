@@ -3,6 +3,8 @@
   <br> <%= @merchant.city %>, <%= @merchant.state %>, <%= @merchant.zip %>
 </h3>
 
+<%= link_to "#{@merchant.name} Items", "/merchant/items?merchant_id=#{@merchant.id}" %>
+
 <section>
   <% @pending_orders.each do |order| %>
     <ul id="merchant-orders-<%=order.id%>">
