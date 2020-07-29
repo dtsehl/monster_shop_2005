@@ -13,11 +13,13 @@ class Merchant::DashboardController < ApplicationController
   def new
     @merchant = Merchant.find(current_user.merchant_id)
     @item = Item.new
+    require "pry"; binding.pry
   end
 
   def create
     @merchant = Merchant.find(current_user.merchant_id)
     item = @merchant.items.create(item_params)
+    require "pry"; binding.pry
     if item.save
       redirect_to "/merchant/items"
       flash[:notice] = "#{item.name} saved!"
@@ -43,7 +45,6 @@ class Merchant::DashboardController < ApplicationController
 
   def items
     @merchant = Merchant.find(params[:merchant_id])
-    require "pry"; binding.pry
   end
 
   def update
@@ -62,8 +63,7 @@ class Merchant::DashboardController < ApplicationController
   end
 
   private
-
   def item_params
-    params.require(:item).permit(:name,:description,:price,:inventory,:image)
+    params.permit(:name,:description,:price,:inventory,:image)
   end
 end
