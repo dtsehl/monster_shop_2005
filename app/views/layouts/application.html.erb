@@ -17,6 +17,7 @@
       <% if current_admin? %>
         <%= link_to "Dashboard", "/admin" %>
         <%= link_to "All Users", "/admin/users" %>
+        <%= link_to "Admin Merchants", "/admin/merchants" %>
         <%= link_to "Profile", "/profile" %>
         <%= link_to "Logout", "/logout", method: :delete%>
         <p style='color:white;'>Logged in as <%= current_user.name %></p>
