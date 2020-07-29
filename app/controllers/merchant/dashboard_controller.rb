@@ -24,6 +24,10 @@ class Merchant::DashboardController < ApplicationController
     redirect_to request.referrer
   end
 
+  def items
+    @merchant = Merchant.find(params[:merchant_id])
+  end
+
   def require_merchant
     render file: "/public/404" unless current_merchant?
   end
