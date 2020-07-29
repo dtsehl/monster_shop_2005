@@ -57,6 +57,7 @@ Rails.application.routes.draw do
     get '/dashboard', to: 'dashboard#index'
     get '/items', to: 'dashboard#items'
     patch '/items/:item_id', to: 'dashboard#update'
+    delete '/items/:item_id', to: 'dashboard#destroy'
     get '/orders/:order_id', to: 'dashboard#show'
     patch '/orders/:order_id', to: 'dashboard#fulfill_item'
   end
