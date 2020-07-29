@@ -24,7 +24,8 @@ RSpec.describe 'Site Navigation' do
     end
 
     it "routes to the correct place when clicking on any link in the nav bar" do
-      merchant_user = User.create!(name: "Sally", address: "123 Nowhere Pl.", city: "Denver", state: "CO", zip: "80202", email: "merchant@merchant.com", password: "merchant", role: 1)
+      merchant = Merchant.create!(name: 'Dog Shop', address: 'kajshf', city: 'asdlkfj', state: 'sfdkj', zip: 92382)
+      merchant_user = User.create!(name: "Sally", address: "123 Nowhere Pl.", city: "Denver", state: "CO", zip: "80202", email: "merchant@merchant.com", password: "merchant", role: 1, merchant_id: merchant.id)
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(merchant_user)
 

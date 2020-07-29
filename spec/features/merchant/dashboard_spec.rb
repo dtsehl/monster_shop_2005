@@ -36,6 +36,7 @@ RSpec.describe 'Merchant Employee Dashboard' do
     order_pending.save
     merchant_quantity = item_1.quantity + item_2.quantity
     merchant_value =  (item_1.quantity * item_1.price) + (item_2.quantity * item_2.price)
+    formatted_value = '%.2f' % merchant_value
 
     order_fulfilled.item_orders.create!(item: kong, price: kong.price, quantity: 4, status: 'Fulfilled')
     order_fulfilled.item_orders.create!(item: bed, price: bed.price, quantity: 4, status: 'Fulfilled')
@@ -47,13 +48,13 @@ RSpec.describe 'Merchant Employee Dashboard' do
     fill_in :password, with: merchant.password
     click_button "Log In"
 
-    expect(page).to_not have_content(order_fulfilled.id)
+    expect(page).to_not have_content("Order # #{order_fulfilled.id}")
 
     within "#merchant-orders-#{order_pending.id}" do
       expect(page).to have_link(order_pending.id)
       expect(page).to have_content("Created On: #{order_pending.created_at}")
       expect(page).to have_content("Total Quantity of #{dog_shop.name} Items in Order: #{merchant_quantity}")
-      expect(page).to have_content("Total Value of #{dog_shop.name} Items in Order: #{merchant_value}")
+      expect(page).to have_content("Total Value of #{dog_shop.name} Items in Order: $#{formatted_value}")
       click_link "#{order_pending.id}"
       expect(current_path).to eq("/merchant/orders/#{order_pending.id}")
     end

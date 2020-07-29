@@ -17,19 +17,20 @@ RSpec.describe 'User can login' do
     expect(page).to have_content("Hello, #{user.name}, you are now logged in.")
   end
   it 'allows a merchant user to log in with valid information' do
-    m_user = User.create!(name: 'Merchant', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'merchant@me.com', password: 'secret', role: 1)
+    merchant = Merchant.create!(name: 'Dog Shop', address: 'kajshf', city: 'asdlkfj', state: 'sfdkj', zip: 92382)
+    merchant_user = User.create!(name: "Sally", address: "123 Nowhere Pl.", city: "Denver", state: "CO", zip: "80202", email: "merchant@merchant.com", password: "merchant", role: 1, merchant_id: merchant.id)
 
     visit '/login'
     expect(page).to have_field("Email Address")
     expect(page).to have_field("Password")
 
-    fill_in :email, with: m_user.email
-    fill_in :password, with: m_user.password
+    fill_in :email, with: merchant_user.email
+    fill_in :password, with: merchant_user.password
 
     click_button "Log In"
 
     expect(current_path).to eq('/merchant/dashboard')
-    expect(page).to have_content("Hello, #{m_user.name}, you are now logged in.")
+    expect(page).to have_content("Hello, #{merchant_user.name}, you are now logged in.")
   end
   it 'allows an admin user to log in with valid information' do
     a_user = User.create!(name: 'Admin', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'admin@me.com', password: 'secret', role: 2)
@@ -87,11 +88,12 @@ RSpec.describe 'User can login' do
     end
 
     it 'redirects merchant to merchant dashboard' do
-      m_user = User.create!(name: 'Merchant', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'merchant@me.com', password: 'secret', role: 1)
+      merchant = Merchant.create!(name: 'Dog Shop', address: 'kajshf', city: 'asdlkfj', state: 'sfdkj', zip: 92382)
+      merchant_user = User.create!(name: "Sally", address: "123 Nowhere Pl.", city: "Denver", state: "CO", zip: "80202", email: "merchant@merchant.com", password: "merchant", role: 1, merchant_id: merchant.id)
 
       visit '/login'
-      fill_in :email, with: m_user.email
-      fill_in :password, with: m_user.password
+      fill_in :email, with: merchant_user.email
+      fill_in :password, with: merchant_user.password
 
       click_button "Log In"
 
@@ -114,13 +116,3 @@ RSpec.describe 'User can login' do
     end
   end
 end
-
-
-# User Story 15, Users who are logged in already are redirected
-#
-# As a registered user, merchant, or admin
-# When I visit the login path
-# If I am a regular user, I am redirected to my profile page
-# If I am a merchant user, I am redirected to my merchant dashboard page
-# If I am an admin user, I am redirected to my admin dashboard page
-# And I see a flash message that tells me I am already logged in

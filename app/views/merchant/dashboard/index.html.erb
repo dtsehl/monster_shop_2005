@@ -6,10 +6,10 @@
 <section>
   <% @pending_orders.each do |order| %>
     <ul id="merchant-orders-<%=order.id%>">
-      <li><%= link_to order.id, "/merchant/orders/#{order.id}" %></li>
+      <li>Order # <%= link_to order.id, "/merchant/orders/#{order.id}" %></li>
       <li>Created On: <%= order.created_at %></li>
       <li>Total Quantity of <%= @merchant.name %> Items in Order: <%= order.total_merchant_quantity(@merchant.id)%></li>
-      <li>Total Value of <%= @merchant.name %> Items in Order: <%= order.total_merchant_value(@merchant.id) %></li>
+      <li>Total Value of <%= @merchant.name %> Items in Order: <%= number_to_currency(order.total_merchant_value(@merchant.id)) %></li>
   <% end  %>
 </section>
 
