@@ -30,13 +30,11 @@ RSpec.describe 'Merchant items index' do
 
     click_link "#{dog_shop.name} Items"
 
-    expect(page).to have_css('.items', count: 2)
-
     within "#item-#{pull_toy.id}" do
       expect(page).to have_content(pull_toy.name)
       expect(page).to have_content(pull_toy.description)
-      expect(page).to have_content("Price: #{pull_toy.price}")
-      expect(page).to have_css("img=[*src='http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg']")
+      expect(page).to have_content("Price: $#{pull_toy.price}.00")
+      expect(page).to have_css("img[@src='http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg']")
       expect(page).to have_content("Status: Active")
       expect(page).to have_content(pull_toy.inventory)
       click_link "Deactivate Item"
