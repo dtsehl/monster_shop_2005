@@ -25,7 +25,7 @@
           <%= link_to "Activate Item", "/merchant/items/#{item.id}", method: :patch %>
         <% end %>
         <br>
-        <%= link_to "Delete Item", "/merchant/item/#{item.id}", method: :delete if item.never_ordered? %>
+        <%= link_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.never_ordered? %>
       </li>
       <br>
     <% end %>
