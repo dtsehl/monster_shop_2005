@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-Merchant.destroy_all
-Item.destroy_all
+require 'database_cleaner'
+DatabaseCleaner.clean_with(:truncation)
 
 # Users
 admin = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret', role: 2)
@@ -26,7 +26,7 @@ tire = bike_shop.items.create!(name: "Gatorskins", description: "They'll never p
 bike_pump = bike_shop.items.create!(name: "Bike Pump", description: "To pump it up!", price: 25, image: "https://images-na.ssl-images-amazon.com/images/I/615GENPCD5L._AC_SX425_.jpg", inventory: 15)
 bike_chain = bike_shop.items.create!(name: "Bike Chain", description: "Better chainz!", price: 75, image: "https://images-na.ssl-images-amazon.com/images/I/51cafKW0NgL._AC_.jpg", inventory: 75)
 bike_tool = bike_shop.items.create!(name: "Bike Tool", description: "Make it tight!", price: 30, image: "https://www.rei.com/media/product/718804", inventory: 100)
-lame_clothes = bike_shop.items.create!(name: 'Tight Biker Clothes', description: 'Unnecessary', price: 95, image: 'aslkdfjlsakf', inventory: 9)
+lame_clothes = bike_shop.items.create!(name: 'Tight Biker Clothes', description: 'Unnecessary', price: 95, image: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/MTB_over_the_bar_crash.jpg', inventory: 9)
 
 #dog_shop items
 pull_toy = dog_shop.items.create!(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
@@ -35,20 +35,20 @@ kong = dog_shop.items.create!(name: "Kong", description: "Tasty treat!", price: 
 bed = dog_shop.items.create!(name: "Dog Bed", description: "Sleepy time!", price: 21, image: "https://images-na.ssl-images-amazon.com/images/I/71IvYiQYcAL._AC_SY450_.jpg", inventory: 40)
 
 #pot_shop items
-nug = pot_shop.items.create!(name: 'Nug', description: 'Huge nug!', price: 15, image: 'skldjfslk', inventory: 20)
-pre_roll = pot_shop.items.create!(name: 'PRJ', description: 'Pre-rolled J', price: 10, image: 'alkjsf', inventory: 15)
-edible = pot_shop.items.create!(name: 'Cosmic Brownie', description: 'Super strong!', price: 5, image: 'aslkdjf', inventory: 80)
+nug = pot_shop.items.create!(name: 'Nug', description: 'Huge nug!', price: 15, image: 'https://pbs.twimg.com/profile_images/683152596048084992/reQSEJ1-_400x400.jpg', inventory: 20)
+pre_roll = pot_shop.items.create!(name: 'PRJ', description: 'Pre-rolled J', price: 10, image: 'https://sugarleaf.com/wp-content/uploads/2018/12/sugarleaf-joints.jpg', inventory: 15)
+edible = pot_shop.items.create!(name: 'Cosmic Brownie', description: 'Super strong!', price: 5, image: 'https://image.cnbcfm.com/api/v1/image/106324937-1578421760494gettyimages-1170465516.jpeg?v=1578421822&w=678&h=381', inventory: 80)
 
 #clothes_shop items
-shirt = clothes_shop.items.create!(name: 'White T', description: 'It will stain quickly', price: 10, image: 'sfkjkaljsf', inventory: 25)
-pants = clothes_shop.items.create!(name: 'Khakis', description: 'Light brown', price: 35, image: 'sfkjkaljsf', inventory: 15)
+shirt = clothes_shop.items.create!(name: 'White T', description: 'It will stain quickly', price: 10, image: 'https://www.bulkapparel.com/styleImages/SCImages/Color-item-480-600/16813_f_fm.jpg', inventory: 25)
+pants = clothes_shop.items.create!(name: 'Khakis', description: 'Light brown', price: 35, image: 'https://upload.wikimedia.org/wikipedia/commons/c/cd/Cargo_pants_001.jpg', inventory: 15)
 
 #coffee_shop items
-dark_roast = coffee_shop.items.create!(name: 'Dark Roast', description: 'Like sludge', price: 17, image: 'sfkjkaljsf', inventory: 12)
-light_roast = coffee_shop.items.create!(name: 'Light Roast', description: 'So smooth', price: 15, image: 'sfkjkaljsf', inventory: 16)
+dark_roast = coffee_shop.items.create!(name: 'Dark Roast', description: 'Like sludge', price: 17, image: 'https://upload.wikimedia.org/wikipedia/commons/c/c5/Roasted_coffee_beans.jpg', inventory: 12)
+light_roast = coffee_shop.items.create!(name: 'Light Roast', description: 'So smooth', price: 15, image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0f/400_degrees_new_england_roast_coffee.png/1200px-400_degrees_new_england_roast_coffee.png', inventory: 16)
 
 #tire_shop items
-mud_tires = tire_shop.items.create!(name: 'Mudders', description: 'You can go anywhere', price: 800, image: 'aoiwejflk', inventory: 8)
+mud_tires = tire_shop.items.create!(name: 'Mudders', description: 'You can go anywhere', price: 800, image: 'https://p0.pikist.com/photos/504/439/toys-car-miniature-monster-truck-big-tyres.jpg', inventory: 8)
 
 order_1 = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033)
 order_2 = Order.create!(name: 'Yo', address: 'Whatever', city: 'Place', state: 'PA', zip: 17033)
