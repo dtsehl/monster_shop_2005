@@ -45,4 +45,8 @@ class Item < ApplicationRecord
   def quantity_ordered(id)
     ItemOrder.where("item_id = ?", "#{id}").sum(:quantity)
   end
+
+  def never_ordered?
+    ItemOrder.where(item_id: self.id).empty?
+  end
 end

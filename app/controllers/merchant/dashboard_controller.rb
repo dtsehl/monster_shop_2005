@@ -42,4 +42,10 @@ class Merchant::DashboardController < ApplicationController
   def require_merchant
     render file: "/public/404" unless current_merchant?
   end
+
+  def destroy
+     Item.destroy(params[:item_id])
+     flash[:alert] = "Item deleted!"
+     redirect_to request.referrer
+  end
 end
