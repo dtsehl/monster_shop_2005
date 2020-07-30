@@ -62,12 +62,19 @@ alsosecret
 ```
 To login as a default user, please click on the register page on the website and enter your own information!
 
-## Learning Goals - edit this
+## Learning Goals
   - Authentication, authorization
   - ActiveRecord
-    -
+    - Use ActiveRecord queries instead of Ruby when manipulating data
   - Rails
-    - use
+    - Use ReSTful Routes wherever possible
+    - Use Sessions to store data about a user and implement login/logout functionality
+  - One to Many relationships
+  - Many to Many relationships
+  - Basics of styling with HTML, CSS
+  - Try using `form_for` instead of `form_tag`
+  - Use Partials when applicable
+  - Use namespacing, resources
 
 ## Screenshots
 
@@ -82,18 +89,3 @@ To login as a default user, please click on the register page on the website and
 
 ### Merchant Show Page
 <img width="1440" alt="Monsters Be Shoppin' Merchant Show Page" src="https://user-images.githubusercontent.com/62079009/88980727-8d369480-d281-11ea-85ef-b199afc8a809.jpeg">
-
-### Rails
-* Create routes for namespaced routes
-* Implement partials to break a page into reusable components
-* Use Sessions to store information about a user and implement login/logout functionality
-* Use filters (e.g. `before_action`) in a Rails controller
-* Limit functionality to authorized users
-* Use BCrypt to hash user passwords before storing in the database
-
-### ActiveRecord
-* Use built-in ActiveRecord methods to join multiple tables of data, calculate statistics and build collections of data grouped by one or more attributes
-
-### Databases
-* Design and diagram a Database Schema
-* Write raw SQL queries (as a debugging tool for AR)
