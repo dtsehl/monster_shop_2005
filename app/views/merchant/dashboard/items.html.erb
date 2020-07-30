@@ -20,11 +20,12 @@
         <%= item.inventory %>
         <br>
         <% if item.active? %>
-          <%= link_to "Deactivate Item", "/merchant/items/#{item.id}", method: :patch %>
+          <%= link_to "Deactivate Item", merchant_change_status_path(item.id), method: :patch %>
         <% else %>
-          <%= link_to "Activate Item", "/merchant/items/#{item.id}", method: :patch %>
+          <%= link_to "Activate Item", merchant_change_status_path(item.id), method: :patch %>
         <% end %>
         <br>
+        <%= link_to "Edit Item", "/merchant/items/#{item.id}/edit" %>
         <%= link_to "Delete Item", "/merchant/items/#{item.id}", method: :delete if item.never_ordered? %>
       </li>
       <br>
