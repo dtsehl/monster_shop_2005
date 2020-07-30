@@ -49,4 +49,9 @@ class Item < ApplicationRecord
   def never_ordered?
     ItemOrder.where(item_id: self.id).empty?
   end
+
+  def fulfilled?(order_id)
+    return false if self.item_orders.where(order_id: order_id).first.status == 'Pending'
+    true
+  end
 end
