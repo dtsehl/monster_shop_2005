@@ -26,5 +26,4 @@ class Merchant::ItemController < ApplicationController
   def item_params
     params.require(:item).permit(:name,:description,:price,:inventory,:image)
   end
-
 end

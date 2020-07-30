@@ -46,7 +46,6 @@ class Merchant::DashboardController < ApplicationController
   end
 
   def change_item_status
-    # require "pry"; binding.pry
     item = Item.find(params[:item_id])
     item.toggle!(:active?)
     if item.active?

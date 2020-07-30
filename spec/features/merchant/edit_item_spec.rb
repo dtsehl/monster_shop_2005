@@ -19,11 +19,11 @@ RSpec.describe 'Merchant items edit' do
 
     expect(current_path).to eq("/merchant/items/#{pull_toy.id}/edit")
 
-    expect(find_field('Name').value).to eq "Pull Toy"
-    expect(find_field('Price').value).to eq '10'
-    expect(find_field('Description').value).to eq "Great pull toy!"
-    expect(find_field('Image').value).to eq("http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg")
-    expect(find_field('Inventory').value).to eq '32'
+    expect(find_field('Name').value).to eq(pull_toy.name)
+    expect(find_field('Price').value).to eq(pull_toy.price.to_s)
+    expect(find_field('Description').value).to eq(pull_toy.description)
+    expect(find_field('Image').value).to eq(pull_toy.image)
+    expect(find_field('Inventory').value).to eq(pull_toy.inventory.to_s)
 
     fill_in "Description", with: "Great for large breeds!"
 
@@ -31,11 +31,11 @@ RSpec.describe 'Merchant items edit' do
 
     expect(current_path).to eq("/merchant/items")
     expect(page).to have_content("Item successfully updated")
-    expect(page).to have_content("Pull Toy")
-    expect(page).to have_content("$10.00")
+    expect(page).to have_content(pull_toy.name)
+    expect(page).to have_content(pull_toy.price)
     expect(page).to have_content("Great for large breeds!")
     expect(page).to have_css("img[src*='#{pull_toy.image}']")
-    expect(page).to have_content("32")
+    expect(page).to have_content(pull_toy.inventory)
     expect(page).to have_content("Active")
   end
 
@@ -57,11 +57,11 @@ RSpec.describe 'Merchant items edit' do
 
     expect(current_path).to eq("/merchant/items/#{pull_toy.id}/edit")
 
-    expect(find_field('Name').value).to eq "Pull Toy"
-    expect(find_field('Price').value).to eq '10'
-    expect(find_field('Description').value).to eq "Great pull toy!"
-    expect(find_field('Image').value).to eq("http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg")
-    expect(find_field('Inventory').value).to eq '32'
+    expect(find_field('Name').value).to eq(pull_toy.name)
+    expect(find_field('Price').value).to eq(pull_toy.price.to_s)
+    expect(find_field('Description').value).to eq(pull_toy.description)
+    expect(find_field('Image').value).to eq(pull_toy.image)
+    expect(find_field('Inventory').value).to eq(pull_toy.inventory.to_s)
 
     fill_in "Description", with: ""
 
@@ -70,10 +70,10 @@ RSpec.describe 'Merchant items edit' do
 
     expect(current_path).to eq("/merchant/items/#{pull_toy.id}/edit")
 
-    expect(find_field('Name').value).to eq "Pull Toy"
-    expect(find_field('Price').value).to eq '10'
-    expect(find_field('Description').value).to eq "Great pull toy!"
-    expect(find_field('Image').value).to eq("http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg")
-    expect(find_field('Inventory').value).to eq '32'
+    expect(find_field('Name').value).to eq(pull_toy.name)
+    expect(find_field('Price').value).to eq(pull_toy.price.to_s)
+    expect(find_field('Description').value).to eq(pull_toy.description)
+    expect(find_field('Image').value).to eq(pull_toy.image)
+    expect(find_field('Inventory').value).to eq(pull_toy.inventory.to_s)
   end
 end
