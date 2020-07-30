@@ -9,6 +9,7 @@
 require 'database_cleaner'
 DatabaseCleaner.clean_with(:truncation)
 DatabaseCleaner.allow_remote_database_url = true
+DatabaseCleaner.allow_production = true
 
 # Users
 admin = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret', role: 2)
