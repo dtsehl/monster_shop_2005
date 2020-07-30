@@ -1,13 +1,64 @@
-# Monster Shop
-BE Mod 2 Week 4/5 Group Project
+# Monsters Be Shoppin'
+
+## [Live Site (Heroku Deployment)](https://monsters-be-shoppin.herokuapp.com/)
+
+## Dev Team
+
+### [Taija Warbelow](https://github.com/twarbelow)
+### [Michael Evans](https://github.com/michaeljevans)
+### [Alex Desjardins](https://github.com/moosehandlr)
+### [Dan Sehl](https://github.com/dtsehl)
 
 ## Background and Description
 
-"Monster Shop" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will be able to get "shipped" by an admin. Each user role will have access to some or all CRUD functionality for application models.
+"Monsters Be Shoppin'" is a fictitious e-commerce platform where users can register to place items into a shopping cart and 'check out'. Users who work for a merchant can mark their items as 'fulfilled'; the last merchant to mark items in an order as 'fulfilled' will be able to get "shipped" by an admin. Each user role will have access to some or all CRUD functionality for application models.
 
-Students will be put into 3 or 4 person groups to complete the project.
+## Schema
+(insert picture here of our visualized schema)
 
-## Learning Goals
+## User Roles
+- Visitor - not registered, anonymous, they are only allowed to view information on the website and add items to their cart but can't do anything further.
+- Regular User - registered user with details including email, secure password, name, city and state. They are able to check out items in their cart, thereby placing an order and initiating the order fulfillment process.
+- Merchant - this user is associated with a merchant and can fulfill orders, create/update/delete items on behalf of that merchant, and update merchant information.
+- Admin User - a registered user who has unrestricted assess to all parts of the application and can act on behalf of a regular user or merchant user.
+
+## Implementation instructions
+Follow these instructions in your terminal:
+
+Clone this repo:
+```
+  git clone git@github.com:twarbelow/monster_shop_2005.git
+```
+Install/update gems:
+```
+  bundle install
+  bundle update
+```
+Create the database:
+```
+  rails db:{create,migrate,seed}
+```
+Run tests:
+```
+  bundle exec rspec
+  open coverage/index.html
+```
+Start the server:
+```
+  rails s
+```
+Browse to the local deployment of the app by using your browser of choice to go to localhost:3000
+
+## Learning Goals - edit this
+  - Authentication, authorization
+  - ActiveRecord
+    -
+  - Rails
+    - use
+
+## Screenshots
+
+  Insert screenshots here
 
 ### Rails
 * Create routes for namespaced routes

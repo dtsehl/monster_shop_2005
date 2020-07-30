@@ -11,6 +11,23 @@ class Merchant::DashboardController < ApplicationController
     @merchant_id = User.find(session[:user_id]).merchant_id
   end
 
+  def new
+    @merchant = Merchant.find(current_user.merchant_id)
+    @item = Item.new
+  end
+
+  def create
+    @merchant = Merchant.find(current_user.merchant_id)
+    item = @merchant.items.create(item_params)
+    if item.save
+      redirect_to "/merchant/items"
+      flash[:notice] = "#{item.name} saved!"
+    else
+      flash[:error] = item.errors.full_messages.to_sentence
+      render :new
+    end
+  end
+
   def fulfill_item
     item_order = ItemOrder.where(item_id: params[:item_id], order_id: params[:order_id]).first
     item_order.status = "Fulfilled"
@@ -26,7 +43,7 @@ class Merchant::DashboardController < ApplicationController
   end
 
   def items
-    @merchant = Merchant.find(params[:merchant_id])
+    @merchant = Merchant.find(current_user.merchant_id)
   end
 
   def update
@@ -52,5 +69,11 @@ class Merchant::DashboardController < ApplicationController
 
   def show_item
     @item = Item.find(params[:item_id])
+  end
+
+  private
+  
+  def item_params
+    params.require(:item).permit(:name,:description,:price,:inventory,:image)
   end
 end
