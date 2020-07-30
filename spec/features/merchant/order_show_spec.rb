@@ -47,4 +47,46 @@ RSpec.describe 'merchant employee order show page' do
 
     expect(current_path).to eq("/merchant/items/#{dog_bone.id}")
   end
+
+  it 'displays a link to fulfill items' do
+    dog_shop = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
+    merchant = User.create!(name: 'Jim', address: '456 Blah Blah Blvd', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjim@me.com', password: 'alsosecret', role: 1, merchant_id: dog_shop.id)
+    pull_toy = dog_shop.items.create!(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
+    dog_bone = dog_shop.items.create!(name: "Dog Bone", description: "They'll love it!", price: 21, image: "https://img.chewy.com/is/image/catalog/54226_MAIN._AC_SL1500_V1534449573_.jpg", inventory: 21)
+    kong = dog_shop.items.create!(name: "Kong", description: "Tasty treat!", price: 10, image: "https://images-na.ssl-images-amazon.com/images/I/719dcnCnHfL._AC_SL1500_.jpg", inventory: 50)
+    bed = dog_shop.items.create!(name: "Dog Bed", description: "Sleepy time!", price: 21, image: "https://images-na.ssl-images-amazon.com/images/I/71IvYiQYcAL._AC_SY450_.jpg", inventory: 40)
+    order = Order.create!(name: 'Meg', address: '123 Stang Ave', city: 'Hershey', state: 'PA', zip: 17033, status: 'Pending')
+    order.item_orders.create!(item: pull_toy, price: pull_toy.price, quantity: 4)
+    order.item_orders.create!(item: kong, price: kong.price, quantity: 51)
+
+    visit '/login'
+    fill_in :email, with: merchant.email
+    fill_in :password, with: merchant.password
+    click_button "Log In"
+
+    click_link "#{order.id}"
+
+    expect(current_path).to eq("/merchant/orders/#{order.id}")
+
+    within "#item-#{kong.id}" do
+      expect(page).to_not have_link("Fulfill Item")
+      expect(page).to have_content("Cannot fulfill: insufficient inventory")
+    end
+
+    within "#item-#{pull_toy.id}" do
+      expect(page).to have_link("Fulfill Item")
+      expect(page).to have_content("Inventory: 32")
+      click_link "Fulfill Item"
+    end
+
+    expect(current_path).to eq("/merchant/orders/#{order.id}")
+
+    expect(page).to have_content("Item fulfilled!")
+
+    within "#item-#{pull_toy.id}" do
+      expect(page).to_not have_link("Fulfill Item")
+      expect(page).to have_content("Item already fulfilled.")
+      expect(page).to have_content("Inventory: 28")
+    end
+  end
 end
