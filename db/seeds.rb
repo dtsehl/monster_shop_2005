@@ -8,6 +8,12 @@
 
 require 'database_cleaner'
 DatabaseCleaner.clean_with(:truncation)
+DatabaseCleaner.allow_remote_database_url = true
+
+# Users
+admin = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret', role: 2)
+merchant = User.create!(name: 'Jim', address: '456 Blah Blah Blvd', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjim@me.com', password: 'alsosecret', role: 1)
+
 #merchants
 dog_shop = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
 tire_shop = Merchant.create!(name: 'Rubber, Meet Road', address: '621 Knox St', city: 'Denver', state: 'CO', zip: 80209)
