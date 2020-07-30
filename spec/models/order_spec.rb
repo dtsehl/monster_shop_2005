@@ -48,7 +48,7 @@ describe Order, type: :model do
       fill_in :password, with: merchant.password
       click_button "Log In"
 
-      expect(@order_1.merchant_items(@meg.id)).to eq([@tire])
+      expect(@order_1.merchant_items).to eq([@tire])
     end
   end
 
