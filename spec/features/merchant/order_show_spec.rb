@@ -26,7 +26,7 @@ RSpec.describe 'merchant employee order show page' do
     click_link "#{order.id}"
 
     expect(current_path).to eq("/merchant/orders/#{order.id}")
-    require 'pry'; binding.pry
+
     within "#item-#{pull_toy.id}" do
       expect(page).to have_link("#{pull_toy.name}")
       expect(page).to have_css("img[@src='http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg']")
