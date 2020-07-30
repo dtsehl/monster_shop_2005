@@ -1,0 +1,24 @@
+<h1>Order <%= @order.id %></h1>
+<section>
+  <ul>
+    <% @order.merchant_items(@merchant_id).each do |item|%>
+      <li id="item-<%= item.id %>">
+      <%=link_to item.name, "/merchant/items/#{item.id}"  %>
+      <br>
+      <%= image_tag item.image%>
+      <br>
+      Price per item: <%= number_to_currency(item.price)  %>
+      <br>
+      Quantity ordered: <%= item.quantity_ordered(item.id) %>
+      <br>
+      <% if item.fulfilled?(@order.id) %>
+        <%= "Item already fulfilled." %>
+      <% elsif item.insufficient_quantity?(@order.id) %>
+        <%= "Cannot fulfill: insufficient inventory" %>
+      <% else %>
+        <%= link_to "Fulfill Item", "/merchant/orders/#{@order.id}?item_id=#{item.id}", method: :patch %>
+      <% end %>
+      </li>
+    <% end %>
+  </ul>
+</section>

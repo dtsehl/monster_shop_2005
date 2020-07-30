@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20200728025016) do
     t.string "name"
     t.string "description"
     t.integer "price"
-    t.string "image"
+    t.string "image", default: "generic-image-placeholder.png"
     t.boolean "active?", default: true
     t.integer "inventory"
     t.bigint "merchant_id"

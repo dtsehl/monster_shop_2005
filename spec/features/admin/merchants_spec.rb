@@ -165,5 +165,27 @@ RSpec.describe "As an Admin" do
 
       expect(current_path).to eq("/admin/merchants/#{bike_shop.id}")
     end
+
+    it "Merchants name is a link to thier respective show page" do
+      bike_shop = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
+      admin = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret', role: 2)
+
+      visit '/login'
+      fill_in :email, with: admin.email
+      fill_in :password, with: admin.password
+      click_button "Log In"
+
+      visit '/admin/merchants'
+
+      within "#merchant-#{bike_shop.id}" do
+        click_on bike_shop.name
+      end
+
+      expect(current_path).to eq("/admin/merchants/#{bike_shop.id}")
+
+      expect(page).to have_link(bike_shop.name)
+      expect(page).to have_content(bike_shop.address)
+      expect(page).to have_link("All #{bike_shop.name} Items")
+    end
   end
 end
