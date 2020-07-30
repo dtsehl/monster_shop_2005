@@ -73,11 +73,16 @@ RSpec.describe 'merchant employee order show page' do
       expect(page).to have_content("Cannot fulfill: insufficient inventory")
     end
 
+    expect(pull_toy.inventory).to eq(32)
+
     within "#item-#{pull_toy.id}" do
       expect(page).to have_link("Fulfill Item")
-      expect(page).to have_content("Inventory: 32")
       click_link "Fulfill Item"
     end
+
+    pull_toy.reload
+
+    expect(pull_toy.inventory).to eq(28)
 
     expect(current_path).to eq("/merchant/orders/#{order.id}")
 
@@ -86,7 +91,6 @@ RSpec.describe 'merchant employee order show page' do
     within "#item-#{pull_toy.id}" do
       expect(page).to_not have_link("Fulfill Item")
       expect(page).to have_content("Item already fulfilled.")
-      expect(page).to have_content("Inventory: 28")
     end
   end
 end
