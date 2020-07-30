@@ -49,4 +49,8 @@ class Merchant::DashboardController < ApplicationController
      flash[:alert] = "Item deleted!"
      redirect_to request.referrer
   end
+
+  def show_item
+    @item = Item.find(params[:item_id])
+  end
 end
