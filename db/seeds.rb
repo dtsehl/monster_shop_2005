@@ -23,10 +23,6 @@ bike_shop = Merchant.create!(name: "Meg's Bike Shop", address: '123 Bike Rd.', c
 clothes_shop = Merchant.create!(name: 'Lotta Clothes', address: '234 West St', city: 'Denver', state: 'CO', zip: 80208)
 coffee_shop = Merchant.create!(name: 'Bean Roasters', address: '242 Lowell St', city: 'Denver', state: 'CO', zip: 80201)
 
-# Users
-admin = User.create!(name: 'Bob', address: '123 Who Cares Ln', city: 'Denver', state: 'CO', zip: '12345', email: 'regularbob@me.com', password: 'secret', role: 2)
-merchant = User.create!(name: 'Jim', address: '456 Blah Blah Blvd', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjim@me.com', password: 'alsosecret', role: 1, merchant_id: dog_shop.id)
-
 #bike_shop items
 tire = bike_shop.items.create!(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
 bike_pump = bike_shop.items.create!(name: "Bike Pump", description: "To pump it up!", price: 25, image: "https://images-na.ssl-images-amazon.com/images/I/615GENPCD5L._AC_SX425_.jpg", inventory: 15)
