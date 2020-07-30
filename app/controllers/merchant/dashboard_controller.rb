@@ -12,19 +12,18 @@ class Merchant::DashboardController < ApplicationController
   end
 
   def new
-    @merchant = Merchant.find(current_user.merchant_id)
     @item = Item.new
   end
 
   def create
-    @merchant = Merchant.find(current_user.merchant_id)
-    item = @merchant.items.create(item_params)
+    merchant = Merchant.find(current_user.merchant_id)
+    item = merchant.items.create(item_params)
     if item.save
       redirect_to "/merchant/items"
       flash[:notice] = "#{item.name} saved!"
     else
+      redirect_to request.referrer
       flash[:error] = item.errors.full_messages.to_sentence
-      render :new
     end
   end
 
@@ -72,7 +71,7 @@ class Merchant::DashboardController < ApplicationController
   end
 
   private
-  
+
   def item_params
     params.require(:item).permit(:name,:description,:price,:inventory,:image)
   end
