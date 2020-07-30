@@ -8,6 +8,7 @@ class Merchant::DashboardController < ApplicationController
 
   def show
     @order = Order.find(params[:order_id])
+    @merchant_id = User.find(session[:user_id]).merchant_id
   end
 
   def new
@@ -60,7 +61,18 @@ class Merchant::DashboardController < ApplicationController
     render file: "/public/404" unless current_merchant?
   end
 
+  def destroy
+     Item.destroy(params[:item_id])
+     flash[:alert] = "Item deleted!"
+     redirect_to request.referrer
+  end
+
+  def show_item
+    @item = Item.find(params[:item_id])
+  end
+
   private
+  
   def item_params
     params.require(:item).permit(:name,:description,:price,:inventory,:image)
   end

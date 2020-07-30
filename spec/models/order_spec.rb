@@ -20,7 +20,6 @@ describe Order, type: :model do
     before :each do
       @meg = Merchant.create(name: "Meg's Bike Shop", address: '123 Bike Rd.', city: 'Denver', state: 'CO', zip: 80203)
       @brian = Merchant.create(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
-
       @tire = @meg.items.create(name: "Gatorskins", description: "They'll never pop!", price: 100, image: "https://www.rei.com/media/4e1f5b05-27ef-4267-bb9a-14e35935f218?size=784x588", inventory: 12)
       @pull_toy = @brian.items.create(name: "Pull Toy", description: "Great pull toy!", price: 10, image: "http://lovencaretoys.com/image/cache/dog/tug-toy-dog-pull-9010_2-800x800.jpg", inventory: 32)
 
@@ -40,6 +39,10 @@ describe Order, type: :model do
 
     it "calculates total merchant value" do
       expect(@order_1.total_merchant_value(@brian.id)).to eq(30)
+    end
+
+    it "merchant_items" do
+      expect(@order_1.merchant_items(@meg.id)).to eq([@tire])
     end
   end
 
