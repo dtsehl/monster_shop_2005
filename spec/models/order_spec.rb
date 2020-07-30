@@ -42,13 +42,7 @@ describe Order, type: :model do
     end
 
     it "merchant_items" do
-      merchant = User.create!(name: 'Jim', address: '456 Blah Blah Blvd', city: 'Denver', state: 'CO', zip: '12345', email: 'regularjim@me.com', password: 'alsosecret', role: 1, merchant_id: @meg.id)
-      visit '/login'
-      fill_in :email, with: merchant.email
-      fill_in :password, with: merchant.password
-      click_button "Log In"
-
-      expect(@order_1.merchant_items).to eq([@tire])
+      expect(@order_1.merchant_items(@meg.id)).to eq([@tire])
     end
   end
 
