@@ -31,6 +31,9 @@ class Merchant::DashboardController < ApplicationController
     item_order = ItemOrder.where(item_id: params[:item_id], order_id: params[:order_id]).first
     item_order.status = "Fulfilled"
     item_order.save
+    item = Item.find(params[:item_id])
+    item.inventory -= item_order.quantity
+    flash[:notice] = "Item fulfilled!" if item.save
     order = Order.find(params[:order_id])
     all_order_items = ItemOrder.where('order_id=?', params[:order_id])
     fulfilled = all_order_items.all? {|item| item.status == "Fulfilled"}

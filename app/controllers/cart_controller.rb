@@ -26,8 +26,6 @@ class CartController < ApplicationController
     if item.inventory > session[:cart][params[:item_id]]
       session[:cart][params[:item_id]] += 1
       redirect_to '/cart'
-    else
-      redirect_to '/cart'
     end
   end
 
