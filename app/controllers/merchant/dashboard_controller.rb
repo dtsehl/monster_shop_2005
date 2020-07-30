@@ -8,6 +8,7 @@ class Merchant::DashboardController < ApplicationController
 
   def show
     @order = Order.find(params[:order_id])
+    @merchant_id = User.find(session[:user_id]).merchant_id
   end
 
   def fulfill_item
@@ -47,5 +48,9 @@ class Merchant::DashboardController < ApplicationController
      Item.destroy(params[:item_id])
      flash[:alert] = "Item deleted!"
      redirect_to request.referrer
+  end
+
+  def show_item
+    @item = Item.find(params[:item_id])
   end
 end

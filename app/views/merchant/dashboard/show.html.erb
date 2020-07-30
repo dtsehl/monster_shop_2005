@@ -1,0 +1,16 @@
+<h1>Order <%= @order.id %></h1>
+<section>
+  <ul>
+    <% @order.merchant_items(@merchant_id).each do |item|%>
+      <li id="item-<%= item.id %>">
+      <%=link_to item.name, "/merchant/items/#{item.id}"  %>
+      <br>
+      <%= image_tag item.image%>
+      <br>
+      Price per item: <%= number_to_currency(item.price)  %>
+      <br>
+      Quantity ordered: <%= item.quantity_ordered(item.id) %>
+      </li>
+    <% end %>
+  </ul>
+</section>
