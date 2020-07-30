@@ -17,7 +17,7 @@ class Merchant::ItemController < ApplicationController
       flash[:notice] = "Item successfully updated"
     else
       flash[:error] = @item.errors.full_messages.to_sentence
-      render :edit
+      redirect_to request.referrer
     end
   end
 
