@@ -11,7 +11,7 @@
       <br>
       Quantity ordered: <%= item.quantity_ordered(item.id) %>
       <br>
-      <% if item.fulfilled? %>
+      <% if item.fulfilled?(@order.id) %>
         <%= "Item already fulfilled." %>
       <% elsif item.insufficient_quantity? %>
         <%= "Cannot fulfill: insufficient inventory" %>
