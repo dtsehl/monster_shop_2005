@@ -16,7 +16,7 @@
       <% elsif item.insufficient_quantity?(@order.id) %>
         <%= "Cannot fulfill: insufficient inventory" %>
       <% else %>
-        <%= link_to "Fulfill Item", "/merchant/orders/#{order.id}", method: :patch %>
+        <%= link_to "Fulfill Item", "/merchant/orders/#{@order.id}?item_id=#{item.id}", method: :patch %>
       <% end %>
       </li>
     <% end %>
