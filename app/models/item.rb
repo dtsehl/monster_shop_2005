@@ -54,4 +54,9 @@ class Item < ApplicationRecord
     return false if self.item_orders.where(order_id: order_id).first.status == 'Pending'
     true
   end
+
+  def insufficient_quantity?(order_id)
+    return true if self.item_orders.where(order_id: order_id).first.quantity > self.inventory
+    false
+  end
 end
