@@ -37,7 +37,7 @@ Install/update gems:
 ```
 Create the database:
 ```
-  rails db:{create,migrate,seed}
+  rails db:{drop,create,migrate,seed}
 ```
 Run tests:
 ```
@@ -87,7 +87,7 @@ To login as a default user, please click on the register page on the website and
 ## Additional Gems Used
   - `orderly`...but we didn't end up using it
   - `bcrypt` - encrypts passwords
-  - `database_cleaner` - when running `rails db:seed` it cleans the database up
+  - `database_cleaner` - when running `rails db:seed` it cleans the database up, ended up not using because of conflicts with Heroku
   - `nyan-cat-formatter` - to make testing more enjoyable
 
 ## Screenshots
