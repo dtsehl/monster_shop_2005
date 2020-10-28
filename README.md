@@ -28,7 +28,7 @@ Follow these instructions in your terminal:
 
 Clone this repo:
 ```
-  git clone git@github.com:twarbelow/monster_shop_2005.git
+  git clone git@github.com:dtsehl/monster_shop_2005.git
 ```
 Install/update gems:
 ```
