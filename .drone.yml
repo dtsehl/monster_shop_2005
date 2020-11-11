@@ -1,0 +1,10 @@
+kind: pipeline
+name: default
+
+steps:
+- name: test
+  image: ruby:2.5.3
+  commands:
+  - bundle install
+  - rails db:{drop,create,migrate,seed}
+  - bundle exec rspec
